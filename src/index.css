@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: "Outfit Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
   --color-amber-50:  #FFFDEA;
   --color-amber-100: #FFFAC5;
   --color-amber-200: #FFF585;
@@ -24,4 +26,13 @@
   --color-error: #b91c1c;
   --color-background-error: #fee2e2;
   --color-border-error: #fca5a5;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-amber-50 font-sans text-amber-950 antialiased;
+  }
 }
