@@ -3,8 +3,8 @@ export const SITE = {
   name: 'XíimbalApp',
 
   // Imágenes
-  logo: '/images/logo.png',
-  appScreenshot: '/images/app-home.png',
+  logo: '/images/logo-oscuro.webp',
+  appScreenshot: '/images/app-home.jpeg',
 
   // Enlace del botón "Descargar"
   downloadUrl: '#descargar',
