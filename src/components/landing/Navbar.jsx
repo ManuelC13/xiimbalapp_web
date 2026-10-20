@@ -19,7 +19,7 @@ export default function Navbar() {
         solid ? 'bg-amber-50/95 shadow-md shadow-amber-950/5 backdrop-blur' : 'bg-transparent'
       }`}
     >
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10" aria-label="Principal">
+      <nav className="mx-auto flex h-25 max-w-8xl items-center justify-between px-6 lg:px-15" aria-label="Principal">
         <a href="#inicio" aria-label={`${SITE.name}, ir al inicio`} onClick={close}>
           <Logo />
         </a>
