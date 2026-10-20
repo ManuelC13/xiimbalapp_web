@@ -1,13 +1,21 @@
+import { FEATURES } from '@/config/features'
+import FeatureRow from './Features/FeatureRow'
 import Section from '../Section'
 
-// TODO: tarjetas de funciones (mapa, retos, insignias, negocios locales)
 export default function Features() {
   return (
     <Section
-      id="funciones"
-      title="Funciones"
-      subtitle="Todo lo que necesitas para recorrer Yucatán mientras juegas."
-      className="bg-amber-100/50"
-    />
+      id="que-puedes-hacer"
+      title="Qué puedes hacer con XíimbalApp"
+      subtitle="Explora, juega y colecciona mientras recorres Yucatán."
+      align="center"
+      className="bg-amber-100/40"
+    >
+      <div className="space-y-20 lg:space-y-32">
+        {FEATURES.map((feature, index) => (
+          <FeatureRow key={feature.id} feature={feature} reverse={index % 2 === 1} />
+        ))}
+      </div>
+    </Section>
   )
 }

@@ -6,7 +6,7 @@ export default function Download() {
     <Section
       id="descargar"
       title="Descarga la app"
-      subtitle="Muy pronto disponible para Android."
+      subtitle="Disponible muy pronto para su descarga."
       className="bg-amber-100/50"
     />
   )

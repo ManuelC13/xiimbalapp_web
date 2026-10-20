@@ -2,8 +2,11 @@ import { MapPin } from 'lucide-react'
 import { useState } from 'react'
 import { SITE } from '@/config/site'
 
-export default function Logo({ className = '' }) {
+// Logo: imagen + nombre. Si la imagen no existe, muestra un ícono de respaldo.
+// tone = "light" es para fondos oscuros (footer por ejemplo).
+export default function Logo({ tone = 'dark', className = '' }) {
   const [imageFailed, setImageFailed] = useState(false)
+  const light = tone === 'light'
 
   return (
     <span className={`inline-flex items-center gap-3 ${className}`}>
@@ -20,8 +23,8 @@ export default function Logo({ className = '' }) {
         />
       )}
       <span className="text-2xl font-extrabold tracking-tight sm:text-3xl">
-        <span className="text-amber-950">Xíimbal</span>
-        <span className="text-amber-800">App</span>
+        <span className={light ? 'text-amber-50' : 'text-amber-950'}>Xíimbal</span>
+        <span className={light ? 'text-amber-50' : 'text-amber-800'}>App</span>
       </span>
     </span>
   )
