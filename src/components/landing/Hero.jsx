@@ -18,7 +18,7 @@ export default function Hero() {
             Explora los <span className="text-amber-800">Pueblos Mágicos</span> de Yucatán
           </h1>
           <p className="mt-8 max-w-xl text-xl leading-relaxed text-amber-950/90">
-            Descubre lugares, completa retos, gana insignias y recorre el estado con un mapa en tu bolsillo.
+            Descubre lugares íncreibles, completa retos, obtén recompensas y recorre el estado con un mapa en tu bolsillo.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button href={SITE.downloadUrl}>

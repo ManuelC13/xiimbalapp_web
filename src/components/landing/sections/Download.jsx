@@ -6,7 +6,7 @@ export default function Download() {
     <Section
       id="descargar"
       title="Descarga la app"
-      subtitle="Disponible muy pronto para su descarga."
+      subtitle="Disponible muy pronto para su descarga. ¡Encuentra tu próxima aventura con XíimbalApp!"
       className="bg-amber-100/50"
     />
   )
