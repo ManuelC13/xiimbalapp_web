@@ -9,6 +9,7 @@ export default function Towns() {
       title="Pueblos Mágicos"
       subtitle="Descubre los pueblos que puedes explorar con XíimbalApp."
       align="center"
+      reveal
       className="overflow-hidden"
     >
       <TownsCarousel towns={TOWNS} />

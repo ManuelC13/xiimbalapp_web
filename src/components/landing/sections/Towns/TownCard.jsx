@@ -7,14 +7,17 @@ const FALLBACK_BACKGROUNDS = [
   'bg-linear-to-br from-amber-900 to-amber-950',
 ]
 
-export default function TownCard({ town, index, flipped, onToggle }) {
+export default function TownCard({ town, index, visible = true, flipped, onToggle }) {
   const [imageFailed, setImageFailed] = useState(false)
   const showImage = town.image && !imageFailed
   const fallback = FALLBACK_BACKGROUNDS[index % FALLBACK_BACKGROUNDS.length]
   const staggered = index % 2 === 1 ? 'md:mt-12' : ''
 
   return (
-    <li className={`shrink-0 snap-start ${staggered}`}>
+    <li 
+      style={visible ? { transitionDelay: `${Math.min(index, 5) * 100}ms` } : undefined}
+      className={`shrink-0 snap-start transition duration-700 ease-out ${visible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'} ${staggered}`}
+    >
       <button
         type="button"
         onClick={onToggle}

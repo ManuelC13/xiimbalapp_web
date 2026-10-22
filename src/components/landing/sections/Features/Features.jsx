@@ -9,7 +9,7 @@ export default function Features() {
       title="Qué puedes hacer con XíimbalApp"
       subtitle="Explora, juega y colecciona mientras recorres Yucatán."
       align="center"
-      className="bg-amber-100/40"
+      className="overflow-clip bg-amber-100/40"
     >
       <div className="space-y-20 lg:space-y-32">
         {FEATURES.map((feature, index) => (

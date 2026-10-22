@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useRef, useState } from 'react'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
+import useInView from '@/hooks/useInView'
 import TownCard from './TownCard'
 
 const arrowClass =
@@ -11,9 +12,10 @@ export default function TownsCarousel({ towns }) {
   const listRef = useRef(null)
   const [openId, setOpenId] = useState(null)
   const { canPrev, canNext, scrollByCard } = useHorizontalScroll(listRef)
+  const [ref, inView] = useInView({ threshold: 0.15 })
 
   return (
-    <div>
+    <div ref={ref}>
       <div className="relative left-1/2 w-screen -translate-x-1/2">
         <ul
           ref={listRef}
@@ -25,6 +27,7 @@ export default function TownsCarousel({ towns }) {
               key={town.id}
               town={town}
               index={index}
+              visible={inView}
               flipped={openId === town.id}
               onToggle={() => setOpenId((current) => (current === town.id ? null : town.id))}
             />

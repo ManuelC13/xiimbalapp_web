@@ -1,6 +1,9 @@
+import Reveal from "../ui/Reveal"
+
 // Contenedor común de las secciones: mismo ancho, espaciado y desplazamiento al navegar con el menú.
-export default function Section({ id, title, subtitle, align = 'left', className = '', children }) {
+export default function Section({ id, title, subtitle, align = 'left', reveal = false, className = '', children }) {
   const centered = align === 'center'
+  const Header = reveal ? Reveal : 'div'
 
   return (
     <section id={id} className={`scroll-mt-20 py-20 lg:py-28 ${className}`}>
