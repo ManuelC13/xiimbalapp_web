@@ -26,6 +26,35 @@
   --color-error: #b91c1c;
   --color-background-error: #fee2e2;
   --color-border-error: #fca5a5;
+
+
+  /* Animaciones del hero */
+  --animate-circle-pulse: circle-pulse 7s ease-in-out infinite;
+  --animate-phone-float: phone-float 6s ease-in-out infinite;
+
+  --animate-showcase-float: showcase-float 5s ease-in-out infinite;
+  --animate-blob-drift: blob-drift 9s ease-in-out infinite;
+  --animate-blob-drift-reverse: blob-drift 11s ease-in-out infinite reverse;
+
+  @keyframes circle-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50%      { transform: scale(1.08); opacity: 0.9; }
+  }
+
+  @keyframes showcase-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3%); }
+  }
+
+  @keyframes blob-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(6%, -8%) scale(1.15); }
+  }
+
+  @keyframes phone-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-14px) rotate(-0.6deg); }
+  }
 }
 
 @layer base {

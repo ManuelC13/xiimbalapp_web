@@ -41,13 +41,13 @@ export default function About() {
           {HIGHLIGHTS.map(({ icon: Icon, title, text }) => (
             <li
               key={title}
-              className="flex items-center gap-5 rounded-3xl border border-amber-100 bg-white p-6 shadow-lg shadow-amber-950/5"
+              className="group flex cursor-default items-center gap-5 rounded-3xl border border-amber-100 bg-white p-6 shadow-lg shadow-amber-950/5 transition duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.02] hover:border-amber-400 hover:shadow-xl hover:shadow-amber-500/25 active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-0 motion-reduce:hover:scale-100"
             >
-              <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-amber-950">
+              <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-amber-950 transition duration-300 ease-out group-hover:rotate-6 group-hover:scale-110 group-hover:bg-amber-950 group-hover:text-amber-400 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100">
                 <Icon className="size-7" aria-hidden />
               </span>
               <div>
-                <h3 className="text-xl font-extrabold">{title}</h3>
+                <h3 className="text-xl font-extrabold transition-colors duration-300 group-hover:text-amber-700">{title}</h3>
                 <p className="mt-1 leading-relaxed text-amber-800 lg:pr-2">{text}</p>
               </div>
             </li>

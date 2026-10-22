@@ -1,6 +1,7 @@
-import { siFacebook, siInstagram, siTiktok } from 'simple-icons'
+import { siAndroid, siFacebook, siInstagram, siTiktok } from 'simple-icons'
 
 const ICONS = {
+  android: siAndroid,
   facebook: siFacebook,
   instagram: siInstagram,
   tiktok: siTiktok,

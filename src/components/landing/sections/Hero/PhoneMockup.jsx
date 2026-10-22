@@ -33,11 +33,11 @@ export default function PhoneMockup({ className = '' }) {
     <div className={`relative flex items-center justify-center ${className}`}>
       {/* Círculo decorativo detrás del teléfono */}
       <div
-        className="absolute size-90 rounded-full bg-amber-100/60 sm:size-115 lg:size-140"
+        className="absolute size-90 animate-circle-pulse rounded-full bg-amber-100/60 will-change-transform motion-reduce:animate-none sm:size-115 lg:size-140"
         aria-hidden
       />
 
-      <div className="relative w-62.5 rounded-[2.75rem] border-12 border-amber-950 bg-amber-950 shadow-2xl shadow-amber-950/30 sm:w-72.5 lg:w-[320px]">
+      <div className="relative w-62.5 animate-phone-float rounded-[2.75rem] border-12 border-amber-950 bg-amber-950 shadow-2xl shadow-amber-950/30 will-change-transform motion-reduce:animate-none sm:w-72.5 lg:w-[320px]">
         <div className="aspect-9/19 overflow-hidden rounded-4xl bg-amber-50">
           {imageFailed ? (
             <PlaceholderScreen />

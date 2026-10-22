@@ -10,8 +10,16 @@ export const SITE = {
   },
   appScreenshot: '/images/app-home.jpeg',
 
-  // Enlace del botón "Descargar"
+  // Enlace del botón "Descargar app"
   downloadUrl: '#descargar',
+
+  // Enlace para el botón "Descargar APK"
+  apk: {
+    url: '', 
+    version: '',                     // OPCIONAL - ejemplo: 1.0.0
+    size: '',                        // OPCIONAL - ejemplo: 45 MB
+    minAndroid: '', // OPCIONAL - ejemplo: Android 8.0 o superior
+  },
 
   // Redes sociales
   social: [
