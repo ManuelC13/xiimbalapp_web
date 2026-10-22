@@ -25,19 +25,23 @@ function PlaceholderScreen() {
   )
 }
 
+const PHONE_WIDTH =
+  'lg:[--phone-w:clamp(190px,calc((100svh_-_280px)*0.4737_+_24px),320px)] ' +
+  'lg:short:[--phone-w:clamp(190px,calc((100svh_-_224px)*0.4737_+_24px),320px)]'
+
 // Teléfono con la captura de la app
 export default function PhoneMockup({ className = '' }) {
   const [imageFailed, setImageFailed] = useState(false)
 
   return (
-    <div className={`relative flex items-center justify-center ${className}`}>
+    <div className={`relative flex items-center justify-center ${PHONE_WIDTH} ${className}`}>
       {/* Círculo decorativo detrás del teléfono */}
       <div
-        className="absolute size-90 animate-circle-pulse rounded-full bg-amber-100/60 will-change-transform motion-reduce:animate-none sm:size-115 lg:size-140"
+        className="absolute size-90 animate-circle-pulse rounded-full bg-amber-100/60 will-change-transform motion-reduce:animate-none sm:size-115 lg:size-[calc(var(--phone-w)*1.75)]"
         aria-hidden
       />
 
-      <div className="relative w-62.5 animate-phone-float rounded-[2.75rem] border-12 border-amber-950 bg-amber-950 shadow-2xl shadow-amber-950/30 will-change-transform motion-reduce:animate-none sm:w-72.5 lg:w-[320px]">
+      <div className="relative w-62.5 animate-phone-float rounded-[2.75rem] border-12 border-amber-950 bg-amber-950 shadow-2xl shadow-amber-950/30 will-change-transform motion-reduce:animate-none sm:w-72.5 lg:w-(--phone-w)">
         <div className="aspect-9/19 overflow-hidden rounded-4xl bg-amber-50">
           {imageFailed ? (
             <PlaceholderScreen />

@@ -12,9 +12,9 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-10 px-6 pb-20 pt-32 lg:grid-cols-[1.15fr_1fr] lg:gap-6 lg:px-10">
+      <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-10 px-6 pb-20 pt-32 lg:grid-cols-[1.15fr_1fr] lg:gap-6 lg:px-10 lg:short:pb-10 lg:short:pt-28">
         <div className="max-w-2xl lg:pl-10">
-          <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
+          <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:short:text-5xl">
             Explora los <span className="text-amber-800">Pueblos Mágicos</span> de Yucatán
           </h1>
           <p className="mt-8 max-w-lg text-xl leading-relaxed text-amber-950/90">
