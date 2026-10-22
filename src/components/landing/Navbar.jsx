@@ -21,7 +21,7 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex h-25 max-w-8xl items-center justify-between px-6 lg:px-15" aria-label="Principal">
         <a href="#inicio" aria-label={`${SITE.name}, ir al inicio`} onClick={close}>
-          <Logo />
+          <Logo variant={solid ? 'scrolled' : 'hero'} />
         </a>
 
         {/* Escritorio */}

@@ -3,7 +3,11 @@ export const SITE = {
   name: 'XíimbalApp',
 
   // Imágenes
-  logo: '/images/logo-oscuro.webp',
+  logos: {
+    hero: '/images/logo-amber-950.png',      // navbar transparente
+    scrolled: '/images/logo-amber-800.webp', // navbar con fondo, después de scroll
+    footer: '/images/logo-amber-50.png',     // pie de página
+  },
   appScreenshot: '/images/app-home.jpeg',
 
   // Enlace del botón "Descargar"

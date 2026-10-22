@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="mx-auto max-w-8xl px-6 lg:px-20">
         <div className="flex flex-col gap-12 py-12 md:flex-row md:justify-between">
           <a href="#inicio" aria-label={`${SITE.name}, ir al inicio`} className="self-start">
-            <Logo tone="light" />
+            <Logo variant='footer' />
           </a>
 
           <div className="grid gap-10 sm:grid-cols-2 sm:gap-20">

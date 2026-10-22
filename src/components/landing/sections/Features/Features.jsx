@@ -1,6 +1,6 @@
 import { FEATURES } from '@/config/features'
-import FeatureRow from './Features/FeatureRow'
-import Section from '../Section'
+import FeatureRow from './FeatureRow'
+import Section from '../../Section'
 
 export default function Features() {
   return (
