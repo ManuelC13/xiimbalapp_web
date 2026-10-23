@@ -46,14 +46,11 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-6 py-10">
-      <div className="absolute inset-0 -z-10 bg-linear-to-br from-amber-600 via-amber-500 to-amber-200" aria-hidden />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-linear-to-b from-transparent to-amber-50" aria-hidden />
-
+    <main className="flex min-h-screen items-center justify-center bg-amber-50 px-6 py-10">
       <Reveal className="w-full max-w-md">
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 rounded-3xl bg-amber-50 p-8 shadow-xl shadow-amber-950/10 sm:p-10"
+          className="space-y-6 rounded-3xl border border-gris-100 bg-white p-8 shadow-sm sm:p-10"
         >
           <Link to="/" aria-label="Ir al inicio" className="flex justify-center">
             <Logo variant="scrolled" />
@@ -64,9 +61,9 @@ export default function LoginPage() {
             <p className="mt-2 text-gris-700">Accede con tu cuenta de XíimbalApp</p>
           </div>
 
-          <Field id="email" label="Correo" icon={Mail} type="email" autoComplete="email"
+          <Field id="email" label="Correo" placeholder="correo@dominio.com" icon={Mail} required type="email" autoComplete="email"
             value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Field id="password" label="Contraseña" icon={Lock} type="password" autoComplete="current-password"
+          <Field id="password" label="Contraseña" placeholder="********" icon={Lock} required type="password" autoComplete="current-password"
             value={password} onChange={(e) => setPassword(e.target.value)} />
 
           {error && (
