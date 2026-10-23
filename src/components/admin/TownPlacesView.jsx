@@ -1,4 +1,4 @@
-import { ArrowLeft, Plus, MapPin, Tag, Compass, Search, Pencil, Trash2, Image as ImageIcon } from 'lucide-react'
+import { ArrowLeft, Plus, MapPin, Compass, Search, Pencil, Trash2, ChevronRight, Image as ImageIcon } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import TownModal from './TownModal'
 import ConfirmModal from './ConfirmModal'
@@ -10,7 +10,6 @@ export default function TownPlacesView({ town: propTown, onBack }) {
     currentTown,
     placesList,
     filteredPlaces,
-    categories,
     loading,
     error,
     search,
@@ -18,8 +17,6 @@ export default function TownPlacesView({ town: propTown, onBack }) {
     placeToDelete,
     setPlaceToDelete,
     placeDeleteLoading,
-    galleryPlace,
-    setGalleryPlace,
     townModalOpen,
     setTownModalOpen,
     townToDelete,
@@ -151,32 +148,29 @@ export default function TownPlacesView({ town: propTown, onBack }) {
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filteredPlaces.map((place) => {
-            const rawCover = place.images?.[0]?.image_url
-            const coverImage = resolveImageUrl(rawCover)
-            const lat = place.latitude != null ? parseFloat(place.latitude) : null
-            const lng = place.longitude != null ? parseFloat(place.longitude) : null
-            const hasCoords = lat !== null && lng !== null && !isNaN(lat) && !isNaN(lng)
+            const coverImage = resolveImageUrl(place.images?.[0]?.image_url)
             const photosCount = place.images?.length || 0
 
             return (
               <article
                 key={place.place_id}
-                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-md shadow-amber-950/5 transition hover:-translate-y-1 hover:shadow-lg"
+                onClick={() => handleOpenEditPlace(place)}
+                className="group relative flex cursor-pointer flex-col overflow-hidden rounded-3xl bg-white shadow-md shadow-amber-950/5 transition hover:-translate-y-1 hover:shadow-xl"
               >
-                {/* Imagen del lugar */}
-                <div className="relative h-48 w-full bg-amber-100">
+                {/* Portada */}
+                <div className="relative h-48 w-full overflow-hidden bg-amber-100">
                   {coverImage ? (
                     <img
                       src={coverImage}
                       alt={place.name}
-                      className="size-full object-cover"
+                      className="size-full object-cover transition duration-300 group-hover:scale-105"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none'
                       }}
                     />
                   ) : (
-                    <div className="flex size-full items-center justify-center bg-linear-to-br from-amber-200 to-amber-300 text-amber-950/60">
-                      <MapPin className="size-10" />
+                    <div className="flex size-full items-center justify-center bg-linear-to-br from-amber-400 via-amber-500 to-amber-600 text-white">
+                      <MapPin className="size-12 opacity-80" />
                     </div>
                   )}
 
@@ -190,27 +184,13 @@ export default function TownPlacesView({ town: propTown, onBack }) {
                     {place.is_active ? 'Activo' : 'Inactivo'}
                   </span>
 
-                  {/* Botón flotante para ver galería / número de fotos */}
-                  <button
-                    type="button"
-                    title="Ver y agregar fotos"
-                    onClick={() => setGalleryPlace(place)}
-                    className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-amber-950/75 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md transition hover:bg-amber-950"
-                  >
+                  <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-amber-950/70 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
                     <ImageIcon className="size-3.5" />
                     {photosCount} {photosCount === 1 ? 'foto' : 'fotos'}
-                  </button>
+                  </span>
 
-                  {/* Acciones para el lugar: Editar y Eliminar */}
+                  {/* Acción rápida: Eliminar */}
                   <div className="absolute right-3 top-3 flex items-center gap-1.5 opacity-90 transition group-hover:opacity-100">
-                    <button
-                      type="button"
-                      title="Editar lugar"
-                      onClick={() => handleOpenEditPlace(place)}
-                      className="flex size-8 items-center justify-center rounded-full bg-white/90 text-amber-950 shadow-sm backdrop-blur-md transition hover:bg-white hover:text-amber-700"
-                    >
-                      <Pencil className="size-3.5" />
-                    </button>
                     <button
                       type="button"
                       title="Eliminar lugar"
@@ -225,42 +205,19 @@ export default function TownPlacesView({ town: propTown, onBack }) {
                   </div>
                 </div>
 
-                {/* Contenido */}
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-xl font-bold text-amber-950">{place.name}</h3>
-
-                  {place.address && (
-                    <p className="mt-1.5 flex items-center gap-1.5 text-xs text-gris-700">
-                      <MapPin className="size-3.5 shrink-0 text-amber-700" />
-                      <span className="line-clamp-1">{place.address}</span>
+                {/* Info */}
+                <div className="flex flex-1 items-center justify-between gap-3 p-6">
+                  <div className="min-w-0">
+                    <h3 className="truncate text-xl font-bold text-amber-950 transition group-hover:text-amber-700">
+                      {place.name}
+                    </h3>
+                    <p className="mt-1 truncate text-xs text-gris-700">
+                      {place.address || 'Editar información del lugar'}
                     </p>
-                  )}
-
-                  <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-gris-700">
-                    {place.description}
-                  </p>
-
-                  {/* Coordenadas */}
-                  {hasCoords && (
-                    <div className="mt-3 flex items-center gap-2 text-xs font-mono text-gris-400">
-                      <span>{lat.toFixed(4)}, {lng.toFixed(4)}</span>
-                    </div>
-                  )}
-
-                  {/* Categorías asociadas */}
-                  {Array.isArray(place.category_ids) && place.category_ids.length > 0 && (
-                    <div className="mt-4 flex flex-wrap gap-1.5 border-t border-gris-100 pt-3">
-                      {place.category_ids.map((catId) => (
-                        <span
-                          key={catId}
-                          className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-950"
-                        >
-                          <Tag className="size-3 text-amber-700" />
-                          {categories[catId] || `Cat #${catId}`}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                  </div>
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-900 transition group-hover:bg-amber-950 group-hover:text-white">
+                    <ChevronRight className="size-5" />
+                  </span>
                 </div>
               </article>
             )

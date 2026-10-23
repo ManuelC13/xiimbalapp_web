@@ -1,4 +1,5 @@
-import { AlertCircle, CheckCircle2, X } from 'lucide-react'
+import { AlertCircle, CheckCircle2, Save, X } from 'lucide-react'
+import Button from '@/components/ui/Button'
 import { usePlaceForm } from '@/hooks/admin/usePlaceForm'
 import {
   PlaceFormHeader,
@@ -69,7 +70,7 @@ export default function PlaceFormPage() {
   }
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-6 pb-12">
       {/* Encabezado y navegación */}
       <PlaceFormHeader
         town={town}
@@ -77,19 +78,13 @@ export default function PlaceFormPage() {
         isEditing={isEditing}
         name={name}
         isActive={isActive}
-        saving={saving}
-        onCancel={handleCancel}
-        onSubmit={handleSubmit}
       />
 
       {/* Alertas de error y éxito */}
       {error && (
-        <div className="flex items-start gap-3 rounded-2xl border border-border-error bg-background-error p-4 text-sm font-medium text-error shadow-sm">
-          <AlertCircle className="size-5 shrink-0 mt-0.5" />
-          <div className="flex-1">
-            <p className="font-bold">Por favor verifica los siguientes detalles:</p>
-            <p className="mt-0.5">{error}</p>
-          </div>
+        <div className="flex items-start gap-3 rounded-2xl border border-border-error bg-background-error p-4 text-sm text-error">
+          <AlertCircle className="size-5 shrink-0" />
+          <p className="flex-1">{error}</p>
           <button
             type="button"
             onClick={() => setError('')}
@@ -101,14 +96,17 @@ export default function PlaceFormPage() {
       )}
 
       {successMessage && (
-        <div className="flex items-center gap-3 rounded-2xl border border-success/30 bg-success-light p-4 text-sm font-semibold text-success shadow-sm">
+        <div className="flex items-center gap-3 rounded-2xl bg-success-light p-4 text-sm font-semibold text-success">
           <CheckCircle2 className="size-5 shrink-0" />
           <span>{successMessage}</span>
         </div>
       )}
 
       {/* Contenedor del Formulario */}
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 gap-8 rounded-3xl border border-amber-800/50 bg-white p-6 shadow-md shadow-amber-950/5 sm:p-8 lg:grid-cols-3"
+      >
         {/* COLUMNA PRINCIPAL (2 COLUMNAS): Datos e Imágenes */}
         <div className="space-y-8 lg:col-span-2">
           {/* SECCIÓN 1: Información General */}
@@ -158,11 +156,18 @@ export default function PlaceFormPage() {
           categories={categories}
           selectedCategories={selectedCategories}
           toggleCategory={toggleCategory}
-          town={town}
         />
 
-        {/* Botón submit invisible para permitir enviar formulario con Enter */}
-        <button type="submit" className="hidden" aria-hidden="true" tabIndex={-1} />
+        {/* Acciones al pie del formulario */}
+        <div className="flex items-center justify-end gap-3 border-t border-amber-950/10 pt-6 lg:col-span-3">
+          <Button type="button" variant="outline" size="sm" onClick={handleCancel} disabled={saving}>
+            Cancelar
+          </Button>
+          <Button type="submit" size="sm" disabled={saving}>
+            <Save className="size-4" />
+            {saving ? 'Guardando...' : isEditing ? 'Guardar Cambios' : 'Crear Lugar'}
+          </Button>
+        </div>
       </form>
 
       {/* Modal Lightbox para previsualizar foto en grande */}

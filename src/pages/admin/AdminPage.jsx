@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { Award, MapPin, Target, Users } from 'lucide-react'
 import AdminNavbar from '@/components/admin/AdminNavbar'
@@ -21,6 +21,10 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('towns')
 
   const isInsideTown = location.pathname.includes('/towns/')
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
 
   const handleLogout = async () => {
     await logout()

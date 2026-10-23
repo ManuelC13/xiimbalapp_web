@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import { MapPin, Save } from 'lucide-react'
-import Button from '@/components/ui/Button'
+import { ArrowLeft, MapPin } from 'lucide-react'
+import { resolveImageUrl } from '@/api/places'
 
 export default function PlaceFormHeader({
   town,
@@ -8,87 +8,54 @@ export default function PlaceFormHeader({
   isEditing,
   name,
   isActive,
-  saving,
-  onCancel,
-  onSubmit,
 }) {
   const navigate = useNavigate()
 
   return (
-    <div className="space-y-8">
-      {/* Barra de migas de pan / Breadcrumbs interactiva */}
-      <nav aria-label="Ruta de navegación" className="flex items-center gap-2 text-xs font-semibold text-gris-700">
-        <button
-          type="button"
-          onClick={() => navigate('/admin')}
-          className="transition hover:text-amber-950 hover:underline"
-        >
-          Pueblos Mágicos
-        </button>
-        <span>/</span>
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="button"
           onClick={() => navigate(`/admin/towns/${townId}`, { state: { town } })}
-          className="transition hover:text-amber-950 hover:underline text-amber-950 font-bold"
+          className="inline-flex items-center gap-2 text-base font-semibold text-amber-950 transition hover:text-amber-800"
         >
-          {town?.name || 'Pueblo'}
+          <ArrowLeft className="size-5" />
+          <span>Volver a {town?.name || 'Pueblo Mágico'}</span>
         </button>
-        <span>/</span>
-        <span className="rounded-full bg-amber-200/60 px-2.5 py-0.5 text-amber-950 font-bold">
-          {isEditing ? 'Editar Lugar' : 'Nuevo Lugar'}
-        </span>
-      </nav>
+      </div>
 
-      {/* Header Principal */}
-      <div className="relative overflow-hidden rounded-3xl border border-amber-950/10 bg-white p-6 shadow-sm sm:p-8">
-        <div className="pointer-events-none absolute -right-10 -top-10 size-48 rounded-full bg-amber-200/40 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 right-1/4 size-32 rounded-full bg-amber-100/50 blur-2xl" />
-
-        <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-950">
-                <MapPin className="size-3.5 text-amber-800" />
-                {town?.name || 'Pueblo Mágico'}
-              </span>
-              <span
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold ${
-                  isActive
-                    ? 'bg-success-light text-success'
-                    : 'bg-background-error text-error'
-                }`}
-              >
-                <span className={`size-2 rounded-full ${isActive ? 'bg-success' : 'bg-error'}`} />
-                {isActive ? 'Visible en XiimbalApp' : 'Oculto'}
-              </span>
+      <div className="relative overflow-hidden rounded-3xl bg-amber-950 text-white shadow-xl shadow-amber-950/10">
+        {town?.image_url && (
+          <img
+            src={resolveImageUrl(town.image_url)}
+            alt={town.name}
+            className="absolute inset-0 size-full object-cover opacity-35"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none'
+            }}
+          />
+        )}
+        <div className="relative flex flex-col justify-between gap-4 p-6 sm:flex-row sm:items-end sm:p-8">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3.5 py-1 text-sm font-medium backdrop-blur-md">
+              <MapPin className="size-4 text-amber-400" />
+              <span>{town?.name || 'Pueblo Mágico'}</span>
             </div>
-
-            <h1 className="text-2xl font-extrabold tracking-tight text-amber-950 sm:text-4xl">
-              {isEditing ? name || 'Editar Lugar' : 'Registrar Nuevo Lugar'}
+            <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              {isEditing ? name || 'Editar Lugar' : 'Nuevo Lugar'}
             </h1>
-            <p className="max-w-2xl text-sm text-gris-700">
-              {isEditing
-                ? `Actualiza la información, geolocalización, etiquetas y fotografías de este atractivo turístico en ${town?.name}.`
-                : `Completa los datos del nuevo punto de interés para que los visitantes lo descubran en ${town?.name}.`}
+            <p className="mt-2 text-amber-100/90">
+              {isEditing ? 'Editando lugar' : 'Registrando un nuevo lugar'}
             </p>
           </div>
 
-          {/* Acciones principales en cabecera */}
-          <div className="flex shrink-0 items-center gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={onCancel}
-              disabled={saving}
-            >
-              Cancelar
-            </Button>
-            <Button type="button" size="sm" onClick={onSubmit} disabled={saving}>
-              <Save className="size-4" />
-              {saving ? 'Guardando...' : isEditing ? 'Guardar Cambios' : 'Crear Lugar'}
-            </Button>
-          </div>
+          <span
+            className={`inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1 text-xs font-semibold backdrop-blur-md sm:self-auto ${
+              isActive ? 'bg-success-light/90 text-success' : 'bg-background-error/90 text-error'
+            }`}
+          >
+            {isActive ? 'Activo' : 'Inactivo'}
+          </span>
         </div>
       </div>
     </div>
