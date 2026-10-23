@@ -21,8 +21,8 @@ const TYPE = {
 }
 
 const FILTER_BTN = (active) =>
-  `rounded-full px-4 py-2 text-sm font-semibold transition cursor-pointer ${
-    active ? 'bg-amber-900 text-white shadow-sm' : 'text-amber-900 hover:bg-amber-100'
+  `rounded-full px-4 py-1.5 text-sm font-semibold transition cursor-pointer ${
+    active ? 'bg-amber-900 text-white shadow-sm' : 'border border-gris-100 bg-white text-amber-900 hover:bg-amber-100'
   }`
 
 const formatDate = (d) =>
@@ -123,15 +123,15 @@ export default function ChallengesList() {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-x-6 gap-y-3">
-          <div className="flex flex-wrap gap-1 pr-5">
+        <div className="flex flex-wrap gap-x-15 gap-y-3">
+          <div className="flex flex-wrap items-center gap-2">
             {[['all', 'Todos'], ['platform', 'Plataforma'], ['place', 'Negocio']].map(([id, label]) => (
               <button key={id} type="button" onClick={() => setTypeFilter(id)} className={FILTER_BTN(typeFilter === id)}>
                 {label}
               </button>
             ))}
           </div>
-          <div className="flex flex-wrap gap-1 pr-20">
+          <div className="flex flex-wrap items-center gap-2">
             {[['all', 'Cualquier estado'], ['active', 'Activos'], ['inactive', 'Inactivos'], ['postponed', 'Pospuestos']].map(
               ([id, label]) => (
                 <button key={id} type="button" onClick={() => setStatusFilter(id)} className={FILTER_BTN(statusFilter === id)}>

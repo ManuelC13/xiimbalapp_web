@@ -67,4 +67,4 @@ export const updatePlaceCategories = (placeId, categoryIds) =>
     body: categoryIds,
   })
 
-export const getCategories = () => apiRequest('/categories/')
+export { getCategories } from '@/api/categories'
