@@ -13,8 +13,8 @@ export default function AdminNavbar({ user, onLogout }) {
             <p className="text-lg font-semibold text-amber-950">{user.first_name} {user.last_name}</p>
             <p className="text-sm text-gris-700">{user.role_name}</p>
           </div>
-          <Button size="sm" onClick={onLogout}>
-            <LogOut className="size-4" aria-hidden /> Cerrar sesión
+          <Button title="cerrar sesión" size="sm" onClick={onLogout}>
+            <LogOut className="size-4" aria-hidden />
           </Button>
         </div>
       </nav>

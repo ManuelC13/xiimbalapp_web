@@ -12,7 +12,7 @@ const SIZES = {
 // Botón con forma de píldora. Con `href` se renderiza como enlace
 export default function Button({ href, variant = 'dark', size = 'md', className = '', children, ...props }) {
   const classes = [
-    'inline-flex items-center justify-center gap-2 rounded-full font-bold whitespace-nowrap transition-colors',
+    'inline-flex items-center justify-center gap-2 rounded-full font-bold whitespace-nowrap transition-colors cursor-pointer',
     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-950',
     VARIANTS[variant],
     SIZES[size],

@@ -1,26 +1,33 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
-import { Award, MapPin, Target, Users } from 'lucide-react'
+import { Award, MapPin, Target, Users, Tag } from 'lucide-react'
 import AdminNavbar from '@/components/admin/AdminNavbar'
 import TownsList from '@/components/admin/TownsList'
 import TownPlacesView from '@/components/admin/TownPlacesView'
+import BadgesList from '@/components/admin/BadgesList'
+import ChallengesList from '@/components/admin/ChallengesList'
 import PlaceFormPage from '@/pages/admin/PlaceFormPage'
 import { useAuthStore } from '@/store/authStore'
 
 const TABS = [
-  { id: 'towns', label: 'Pueblos y Lugares', icon: MapPin },
-  { id: 'challenges', label: 'Retos', icon: Target, disabled: true },
-  { id: 'badges', label: 'Insignias', icon: Award, disabled: true },
+  { id: 'towns', label: 'Pueblos y Lugares', icon: MapPin, path: '/admin' },
+  { id: 'challenges', label: 'Retos', icon: Target, path: '/admin/challenges' },
+  { id: 'badges', label: 'Insignias', icon: Award, path: '/admin/badges' },
   { id: 'users', label: 'Usuarios', icon: Users, disabled: true },
+  { id: 'categories', label: 'Categorías', icon: Tag, disabled: true }
 ]
 
 export default function AdminPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const { user, logout } = useAuthStore()
-  const [activeTab, setActiveTab] = useState('towns')
 
   const isInsideTown = location.pathname.includes('/towns/')
+  const activeTab = location.pathname.startsWith('/admin/badges')
+    ? 'badges'
+    : location.pathname.startsWith('/admin/challenges')
+      ? 'challenges'
+      : 'towns'
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -47,13 +54,13 @@ export default function AdminPage() {
                   key={tab.id}
                   type="button"
                   disabled={tab.disabled}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => navigate(tab.path)}
                   className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                     active
-                      ? 'bg-amber-950 text-white shadow-sm'
+                      ? 'bg-amber-950 text-white shadow-sm cursor-pointer'
                       : tab.disabled
                         ? 'cursor-not-allowed text-gris-400 opacity-60'
-                        : 'text-amber-950 hover:bg-amber-100'
+                        : 'text-amber-950 hover:bg-amber-100 cursor-pointer'
                   }`}
                 >
                   <Icon className="size-4" />
@@ -72,6 +79,8 @@ export default function AdminPage() {
         {/* Rutas internas del panel de administración */}
         <Routes>
           <Route index element={<TownsList />} />
+          <Route path="badges" element={<BadgesList />} />
+          <Route path="challenges" element={<ChallengesList />} />
           <Route path="towns/:townId" element={<TownPlacesView />} />
           <Route path="towns/:townId/places/new" element={<PlaceFormPage />} />
           <Route path="towns/:townId/places/:placeId/edit" element={<PlaceFormPage />} />
