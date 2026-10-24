@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
         '/uploads': { target: apiTarget, changeOrigin: true, secure: true },
         '/badges': { target: apiTarget, changeOrigin: true, secure: true },
         '/challenges': { target: apiTarget, changeOrigin: true, secure: true },
-        '/categories': { target: apiTarget, changeOrigin: true, secure: true },
+        '/roles': { target: apiTarget, changeOrigin: true, secure: true },
       },
     },
   }

@@ -8,6 +8,7 @@ import BadgesList from '@/components/admin/BadgesList'
 import ChallengesList from '@/components/admin/ChallengesList'
 import CategoriesList from '@/components/admin/CategoriesList'
 import NotificationsView from '@/components/admin/NotificationsView'
+import UsersList from '@/components/admin/UsersList'
 import PlaceFormPage from '@/pages/admin/PlaceFormPage'
 import { useAuthStore } from '@/store/authStore'
 
@@ -16,7 +17,7 @@ const TABS = [
   { id: 'challenges', label: 'Retos', icon: Target, path: '/admin/challenges' },
   { id: 'badges', label: 'Insignias', icon: Award, path: '/admin/badges' },
   { id: 'categories', label: 'Categorías', icon: Tag, path: '/admin/categories' },
-  { id: 'users', label: 'Usuarios', icon: Users, disabled: true },
+  { id: 'users', label: 'Usuarios', icon: Users, path: '/admin/users' },
   { id: 'notifications', label: 'Notificaciones', icon: Bell, path: '/admin/notifications' },
 ]
 
@@ -32,9 +33,11 @@ export default function AdminPage() {
       ? 'challenges'
       : location.pathname.startsWith('/admin/categories')
         ? 'categories'
-        : location.pathname.startsWith('/admin/notifications')
-          ? 'notifications'
-          : 'towns'
+        : location.pathname.startsWith('/admin/users')
+          ? 'users'
+          : location.pathname.startsWith('/admin/notifications')
+            ? 'notifications'
+            : 'towns'
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -89,6 +92,7 @@ export default function AdminPage() {
           <Route path="badges" element={<BadgesList />} />
           <Route path="challenges" element={<ChallengesList />} />
           <Route path="categories" element={<CategoriesList />} />
+          <Route path="users" element={<UsersList />} />
           <Route path="notifications" element={<NotificationsView />} />
           <Route path="towns/:townId" element={<TownPlacesView />} />
           <Route path="towns/:townId/places/new" element={<PlaceFormPage />} />
