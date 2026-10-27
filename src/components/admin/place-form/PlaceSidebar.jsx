@@ -1,4 +1,4 @@
-import { Tag } from 'lucide-react'
+import { Tag, QrCode } from 'lucide-react'
 
 export default function PlaceSidebar({
   isActive,
@@ -6,6 +6,8 @@ export default function PlaceSidebar({
   categories,
   selectedCategories,
   toggleCategory,
+  isEditing,
+  onOpenQrModal,
 }) {
   return (
     <aside className="space-y-8 self-start rounded-2xl border border-amber-800/25 bg-amber-50 p-6 lg:col-span-1">
@@ -38,6 +40,35 @@ export default function PlaceSidebar({
               }`}
             />
           </button>
+        </div>
+      </section>
+
+      {/* SECCIÓN: Código QR de Visita */}
+      <section className="border-t border-amber-950/10 pt-8">
+        <div className="flex items-center gap-2">
+          <QrCode className="size-5 text-amber-800" />
+          <h2 className="text-xl font-bold text-amber-950">Código QR</h2>
+        </div>
+
+        <p className="mt-2 text-xs text-gris-600">
+          Código único para que los turistas escaneen físicamente en este lugar y validen su visita.
+        </p>
+
+        <div className="mt-4">
+          {isEditing ? (
+            <button
+              type="button"
+              onClick={onOpenQrModal}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-amber-950/20 bg-white px-4 py-3 text-sm font-bold text-amber-950 shadow-xs transition hover:bg-amber-950 hover:text-white cursor-pointer"
+            >
+              <QrCode className="size-4" />
+              <span>Gestionar Código QR</span>
+            </button>
+          ) : (
+            <div className="rounded-2xl border border-dashed border-amber-950/20 bg-white/60 p-3.5 text-center text-xs text-gris-500">
+              Podrás generar el código QR una vez que guardes este lugar.
+            </div>
+          )}
         </div>
       </section>
 

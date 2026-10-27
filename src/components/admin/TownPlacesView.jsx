@@ -1,11 +1,15 @@
-import { ArrowLeft, Plus, MapPin, Compass, Search, Pencil, Trash2, ChevronRight, Image as ImageIcon } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowLeft, Plus, MapPin, Compass, Search, Pencil, Trash2, ChevronRight, Image as ImageIcon, QrCode } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import TownModal from './TownModal'
 import ConfirmModal from './ConfirmModal'
+import PlaceQrModal from './PlaceQrModal'
 import { resolveImageUrl } from '@/api/places'
 import { useTownPlaces } from '@/hooks/admin/useTownPlaces'
 
 export default function TownPlacesView({ town: propTown, onBack }) {
+  const [qrModalPlace, setQrModalPlace] = useState(null)
+
   const {
     currentTown,
     placesList,
@@ -189,8 +193,19 @@ export default function TownPlacesView({ town: propTown, onBack }) {
                     {photosCount} {photosCount === 1 ? 'foto' : 'fotos'}
                   </span>
 
-                  {/* Acción rápida: Eliminar */}
+                  {/* Acciones rápidas: Código QR y Eliminar */}
                   <div className="absolute right-3 top-3 flex items-center gap-1.5 opacity-90 transition group-hover:opacity-100">
+                    <button
+                      type="button"
+                      title="Generar o imprimir código QR"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setQrModalPlace(place)
+                      }}
+                      className="flex size-8 items-center justify-center rounded-full bg-white/95 text-amber-950 shadow-sm backdrop-blur-md transition hover:bg-amber-950 hover:text-white cursor-pointer"
+                    >
+                      <QrCode className="size-4" />
+                    </button>
                     <button
                       type="button"
                       title="Eliminar lugar"
@@ -198,7 +213,7 @@ export default function TownPlacesView({ town: propTown, onBack }) {
                         e.stopPropagation()
                         handleOpenDeletePlace(place)
                       }}
-                      className="flex size-8 items-center justify-center rounded-full bg-white/90 text-error shadow-sm backdrop-blur-md transition hover:bg-error hover:text-white"
+                      className="flex size-8 items-center justify-center rounded-full bg-white/90 text-error shadow-sm backdrop-blur-md transition hover:bg-error hover:text-white cursor-pointer"
                     >
                       <Trash2 className="size-3.5" />
                     </button>
@@ -270,6 +285,14 @@ export default function TownPlacesView({ town: propTown, onBack }) {
           />
         )
       })()}
+
+      {/* Modal para ver, generar e imprimir el código QR del lugar */}
+      <PlaceQrModal
+        isOpen={Boolean(qrModalPlace)}
+        place={qrModalPlace}
+        townName={currentTown?.name}
+        onClose={() => setQrModalPlace(null)}
+      />
     </div>
   )
 }

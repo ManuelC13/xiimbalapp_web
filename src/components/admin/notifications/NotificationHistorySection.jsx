@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Bell, Calendar, RefreshCw, Compass, Users, Check, Search } from 'lucide-react'
+import { formatUtcDateTime } from '@/utils/dateUtils'
 
 export default function NotificationHistorySection({
   history,
@@ -63,13 +64,7 @@ export default function NotificationHistorySection({
         <div className="grid gap-4">
           {filteredHistory.map((item) => {
             const dateStr = item.sent_at
-              ? new Date(item.sent_at).toLocaleString('es-MX', {
-                  day: '2-digit',
-                  month: 'short',
-                  year: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })
+              ? formatUtcDateTime(item.sent_at, { month: 'short' })
               : 'Fecha desconocida'
 
             const screenLabel =

@@ -4,6 +4,7 @@ export * from './useTownModal'
 export * from './usePlaceModal'
 export * from './usePlaceGallery'
 export * from './usePlaceForm'
+export * from './usePlaceQr'
 
 export * from './useBadgesList'
 export * from './useBadgeModal'

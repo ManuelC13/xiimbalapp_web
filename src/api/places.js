@@ -67,4 +67,14 @@ export const updatePlaceCategories = (placeId, categoryIds) =>
     body: categoryIds,
   })
 
+// Códigos QR de validación de visita
+export const getPlaceActiveQr = (placeId) =>
+  apiRequest(`/api/admin/places/${placeId}/qr-codes/active`)
+
+export const createPlaceQr = (placeId) =>
+  apiRequest(`/api/admin/places/${placeId}/qr-codes`, { method: 'POST' })
+
+export const revokePlaceQr = (qrId) =>
+  apiRequest(`/api/admin/qr-codes/${qrId}`, { method: 'DELETE' })
+
 export { getCategories } from '@/api/categories'

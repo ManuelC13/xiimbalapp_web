@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { AlertCircle, CheckCircle2, Save, X } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { usePlaceForm } from '@/hooks/admin/usePlaceForm'
+import PlaceQrModal from '@/components/admin/PlaceQrModal'
 import {
   PlaceFormHeader,
   PlaceGeneralInfoSection,
@@ -11,8 +13,11 @@ import {
 } from '@/components/admin/place-form'
 
 export default function PlaceFormPage() {
+  const [qrModalOpen, setQrModalOpen] = useState(false)
+
   const {
     townId,
+    placeId,
     isEditing,
     town,
     categories,
@@ -156,6 +161,8 @@ export default function PlaceFormPage() {
           categories={categories}
           selectedCategories={selectedCategories}
           toggleCategory={toggleCategory}
+          isEditing={isEditing}
+          onOpenQrModal={() => setQrModalOpen(true)}
         />
 
         {/* Acciones al pie del formulario */}
@@ -175,6 +182,16 @@ export default function PlaceFormPage() {
         imageUrl={previewModalUrl}
         onClose={() => setPreviewModalUrl(null)}
       />
+
+      {/* Modal para ver, generar e imprimir código QR */}
+      {isEditing && (
+        <PlaceQrModal
+          isOpen={qrModalOpen}
+          place={{ place_id: Number(placeId), name }}
+          townName={town?.name}
+          onClose={() => setQrModalOpen(false)}
+        />
+      )}
     </div>
   )
 }
