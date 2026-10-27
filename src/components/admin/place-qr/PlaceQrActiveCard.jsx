@@ -1,5 +1,5 @@
 import { Copy, Check, Calendar, Sparkles } from 'lucide-react'
-import { getXiimbalQrSvg } from '@/utils/qrCodeGenerator'
+import { getXiimbalQrSvg } from '@/utils/qr'
 import { formatUtcDateTime } from '@/utils/dateUtils'
 
 export default function PlaceQrActiveCard({

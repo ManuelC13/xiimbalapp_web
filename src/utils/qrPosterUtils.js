@@ -1,4 +1,4 @@
-import { getXiimbalQrSvg, drawXiimbalQrToCanvas } from '@/utils/qrCodeGenerator'
+import { getXiimbalQrSvg, drawXiimbalQrToCanvas } from '@/utils/qr'
 
 /**
  * Escapa caracteres HTML para inyección segura en la plantilla de impresión.
