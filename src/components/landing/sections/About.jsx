@@ -30,8 +30,8 @@ export default function About() {
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-amber-800 sm:text-xl">
             Cada pueblo tiene una historia que contar, un lugar por descubrir y experiencias que
-            vale la pena vivir. <span className="font-extrabold">XíimbalApp</span>, cuyo nombre proviene
-            de la palabra maya <span className="font-semibold italic">Xíimbal</span>, que significa
+            vale la pena vivir. XíimbalApp, cuyo nombre proviene
+            de la palabra maya <span className="font-semibold italic">"Xíimbal"</span>, que significa
             caminar, pasear o recorrer, es tu compañera para explorar los Pueblos Mágicos de Yucatán.
             A través de un mapa interactivo, te acerca a sus atractivos turísticos y a los negocios
             que dan vida a sus comunidades.
