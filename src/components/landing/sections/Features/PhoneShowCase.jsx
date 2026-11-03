@@ -9,7 +9,11 @@ export default function PhoneShowcase({ image, imageAlt, gradient, preview, reve
 
   return (
     <div
-      className={`relative aspect-4/3 w-full overflow-hidden rounded-[2.5rem] shadow-2xl shadow-amber-950/20 ${gradient}`}
+      className={`relative aspect-4/3 w-full overflow-hidden shadow-2xl shadow-amber-950/20 transition-transform duration-500 ease-out hover:scale-[1.01] ${
+        reverse
+          ? 'rounded-[2rem_3rem_2.25rem_3rem]'
+          : 'rounded-[3rem_2rem_3rem_2.25rem]'
+      } ${gradient}`}
     >
       {/* Destellos detrás del teléfono */}
       <div

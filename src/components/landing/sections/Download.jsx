@@ -27,89 +27,102 @@ export default function Download() {
     : null
 
   return (
-    <Section
-      id="descargar"
-      title="¿Listo para explorar?"
-      subtitle={
-        available
-          ? 'Por ahora, puedes disfrutar de XíimbalApp en dispositivos Android. ¡Descárgala y descubre tu próxima aventura!'
-          : 'Disponible muy pronto para su descarga. ¡Esperanos y encuentra tu próxima aventura con XíimbalApp!'
-      }
-      align="center"
-      className="bg-amber-100/50"
-    >
-      <Reveal className="mx-auto max-w-3xl rounded-[2.5rem] border border-amber-100 bg-white p-8 text-center shadow-xl shadow-amber-950/10 sm:p-12">
-        <div className="relative mx-auto size-20">
+    <div className="relative">
+      {/* Onda orgánica superior */}
+      <div className="pointer-events-none -mb-1 overflow-hidden text-amber-100/50" aria-hidden>
+        <svg viewBox="0 0 1440 72" fill="currentColor" className="block h-10 w-full sm:h-16" preserveAspectRatio="none">
+          <path d="M0,24 C360,78 720,-12 1080,42 C1260,68 1380,44 1440,28 L1440,72 L0,72 Z" />
+        </svg>
+      </div>
+
+      <Section
+        id="descargar"
+        title="¿Listo para explorar?"
+        subtitle={
+          available
+            ? 'Por ahora, puedes disfrutar de XíimbalApp en dispositivos Android. ¡Descárgala y descubre tu próxima aventura!'
+            : 'Disponible muy pronto para su descarga. ¡Esperanos y encuentra tu próxima aventura con XíimbalApp!'
+        }
+        align="center"
+        className="bg-amber-100/50"
+      >
+        <Reveal className="mx-auto max-w-3xl rounded-[2.5rem] border border-amber-100 bg-white p-8 text-center shadow-xl shadow-amber-950/10 sm:p-12">
+          <div className="relative mx-auto size-20">
+            <span
+              className="absolute -inset-3 animate-circle-pulse rounded-4xl bg-amber-300/40 motion-reduce:animate-none"
+              aria-hidden
+            />
+            <span className="relative flex size-20 items-center justify-center rounded-3xl bg-amber-500 text-amber-950">
+              <BrandIcon name="android" className="size-10" />
+            </span>
+          </div>
+
+          <h3 className="mt-8 text-2xl font-extrabold sm:text-3xl">XíimbalApp para Android</h3>
+
           <span
-            className="absolute -inset-3 animate-circle-pulse rounded-4xl bg-amber-300/40 motion-reduce:animate-none"
-            aria-hidden
-          />
-          <span className="relative flex size-20 items-center justify-center rounded-3xl bg-amber-500 text-amber-950">
-            <BrandIcon name="android" className="size-10" />
+            className={`mt-4 inline-block rounded-full px-4 py-1 text-sm font-bold ${
+              available ? 'bg-success-light text-success' : 'bg-amber-100 text-amber-800'
+            }`}
+          >
+            {available ? 'Disponible' : 'Próximamente'}
           </span>
-        </div>
 
-        <h3 className="mt-8 text-2xl font-extrabold sm:text-3xl">XíimbalApp para Android</h3>
+          {details.length > 0 && (
+            <dl className="mt-6 flex flex-wrap justify-center gap-x-10 gap-y-3">
+              {details.map(([label, value]) => (
+                <div key={label}>
+                  <dt className="text-sm text-amber-800">{label}</dt>
+                  <dd className="font-extrabold">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
 
-        <span
-          className={`mt-4 inline-block rounded-full px-4 py-1 text-sm font-bold ${
-            available ? 'bg-success-light text-success' : 'bg-amber-100 text-amber-800'
-          }`}
-        >
-          {available ? 'Disponible' : 'Próximamente'}
-        </span>
-
-        {details.length > 0 && (
-          <dl className="mt-6 flex flex-wrap justify-center gap-x-10 gap-y-3">
-            {details.map(([label, value]) => (
-              <div key={label}>
-                <dt className="text-sm text-amber-800">{label}</dt>
-                <dd className="font-extrabold">{value}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
-
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          {available ? (
-            <Button href={url} size="lg">
-              <DownloadIcon className="size-5" aria-hidden />
-              Descargar APK
-            </Button>
-          ) : (
-            <>
-              <Button
-                size="lg"
-                disabled
-                className="disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-amber-950"
-              >
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            {available ? (
+              <Button href={url} size="lg">
                 <DownloadIcon className="size-5" aria-hidden />
                 Descargar APK
               </Button>
-              {/*notifyHref && (
-                <Button href={notifyHref} variant="outline" size="lg">
-                  <Mail className="size-5" aria-hidden />
-                  Avísame cuando esté lista
+            ) : (
+              <>
+                <Button
+                  size="lg"
+                  disabled
+                  className="disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-amber-950"
+                >
+                  <DownloadIcon className="size-5" aria-hidden />
+                  Descargar APK
                 </Button>
-              )*/}
-            </>
-          )}
-        </div>
+                {/*notifyHref && (
+                  <Button href={notifyHref} variant="outline" size="lg">
+                    <Mail className="size-5" aria-hidden />
+                    Avísame cuando esté lista
+                  </Button>
+                )*/}
+              </>
+            )}
+          </div>
 
-        <div className="mt-10 border-t border-amber-100 pt-8 text-left">
-          <h4 className="text-center text-lg text-amber-800 font-extrabold">Cómo instalarla</h4>
-          <ol className="mt-5 grid gap-4 sm:grid-cols-3">
-            {INSTALL_STEPS.map((step, index) => (
-              <li key={step} className="flex items-start gap-3 sm:flex-col sm:items-center sm:text-center">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-amber-500 font-extrabold text-amber-950">
-                  {index + 1}
-                </span>
-                <span className="leading-snug text-amber-800">{step}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </Reveal>
-    </Section>
+          <div className="mt-10 border-t border-amber-100 pt-8 text-left">
+            <h4 className="text-center text-lg text-amber-800 font-extrabold">Cómo instalarla</h4>
+            <ol className="relative mt-5 grid gap-4 sm:grid-cols-3">
+              <div
+                className="pointer-events-none absolute left-[18%] right-[18%] top-4.5 hidden border-t-2 border-dashed border-amber-300/80 sm:block"
+                aria-hidden
+              />
+              {INSTALL_STEPS.map((step, index) => (
+                <li key={step} className="relative flex items-start gap-3 sm:flex-col sm:items-center sm:text-center">
+                  <span className="relative z-10 flex size-9 shrink-0 items-center justify-center rounded-full bg-amber-500 font-extrabold text-amber-950 ring-4 ring-white">
+                    {index + 1}
+                  </span>
+                  <span className="leading-snug text-amber-800">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Reveal>
+      </Section>
+    </div>
   )
 }

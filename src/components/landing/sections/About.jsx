@@ -38,23 +38,37 @@ export default function About() {
           </p>
         </Reveal>
 
-        <ul className="space-y-4">
-          {HIGHLIGHTS.map(({ icon: Icon, title, text }, index) => (
-            <Reveal as="li" key={title} direction="right" delay={index * 120}>
-              <div
-                className="group flex cursor-default items-center gap-5 rounded-3xl border border-amber-100 bg-white p-6 shadow-lg shadow-amber-950/5 transition duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.02] hover:border-amber-400 hover:shadow-xl hover:shadow-amber-500/25 active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-0 motion-reduce:hover:scale-100"
+        <div className="relative">
+          {/* Línea punteada que conecta las tarjetas como estaciones de un camino */}
+          <div
+            className="pointer-events-none absolute bottom-10 left-10 top-10 hidden border-l-2 border-dashed border-amber-300/80 sm:block"
+            aria-hidden
+          />
+
+          <ul className="space-y-4">
+            {HIGHLIGHTS.map(({ icon: Icon, title, text }, index) => (
+              <Reveal
+                as="li"
+                key={title}
+                direction="right"
+                delay={index * 120}
+                className={index === 1 ? 'lg:translate-x-4' : ''}
               >
-                <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-amber-950 transition duration-300 ease-out group-hover:rotate-6 group-hover:scale-110 group-hover:bg-amber-950 group-hover:text-amber-400 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100">
-                  <Icon className="size-7" aria-hidden />
-                </span>
-                <div>
-                  <h3 className="text-xl font-extrabold transition-colors duration-300 group-hover:text-amber-700">{title}</h3>
-                  <p className="mt-1 leading-relaxed text-amber-800 lg:pr-2">{text}</p>
+                <div
+                  className="group relative flex cursor-default items-center gap-5 rounded-3xl border border-amber-100 bg-white p-6 shadow-lg shadow-amber-950/5 transition duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.02] hover:border-amber-400 hover:shadow-xl hover:shadow-amber-500/25 active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-0 motion-reduce:hover:scale-100"
+                >
+                  <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-amber-950 transition duration-300 ease-out group-hover:rotate-6 group-hover:scale-110 group-hover:bg-amber-950 group-hover:text-amber-400 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100">
+                    <Icon className="size-7" aria-hidden />
+                  </span>
+                  <div>
+                    <h3 className="text-xl font-extrabold transition-colors duration-300 group-hover:text-amber-700">{title}</h3>
+                    <p className="mt-1 leading-relaxed text-amber-800 lg:pr-2">{text}</p>
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
-        </ul>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
       </div>
     </Section>
   )

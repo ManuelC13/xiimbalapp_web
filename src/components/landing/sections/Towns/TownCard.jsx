@@ -7,16 +7,23 @@ const FALLBACK_BACKGROUNDS = [
   'bg-linear-to-br from-amber-900 to-amber-950',
 ]
 
+const TILT_CLASSES = [
+  'md:-rotate-1',
+  'md:rotate-1 md:mt-12',
+  'md:-rotate-[0.75deg]',
+  'md:rotate-[1.25deg] md:mt-12',
+]
+
 export default function TownCard({ town, index, visible = true, flipped, onToggle }) {
   const [imageFailed, setImageFailed] = useState(false)
   const showImage = town.image && !imageFailed
   const fallback = FALLBACK_BACKGROUNDS[index % FALLBACK_BACKGROUNDS.length]
-  const staggered = index % 2 === 1 ? 'md:mt-12' : ''
+  const tilt = TILT_CLASSES[index % TILT_CLASSES.length]
 
   return (
     <li 
       style={visible ? { transitionDelay: `${Math.min(index, 5) * 100}ms` } : undefined}
-      className={`shrink-0 snap-start transition duration-700 ease-out ${visible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'} ${staggered}`}
+      className={`shrink-0 snap-start transition duration-700 ease-out ${visible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'} ${tilt}`}
     >
       <button
         type="button"
@@ -28,7 +35,7 @@ export default function TownCard({ town, index, visible = true, flipped, onToggl
         {/* Movimiento al pasar el cursor */}
         <span
           className={`block transition-transform duration-300 ease-out perspective-distant motion-reduce:transform-none ${
-            flipped ? 'group-hover:-translate-y-1' : 'group-hover:-translate-y-2 group-hover:rotate-1'
+            flipped ? 'group-hover:-translate-y-1' : 'group-hover:-translate-y-2 group-hover:rotate-0'
           }`}
         >
           {/* Giro */}
@@ -47,7 +54,7 @@ export default function TownCard({ town, index, visible = true, flipped, onToggl
                   src={town.image}
                   alt=""
                   loading="lazy"
-                  className="absolute inset-0 size-full object-cover"
+                  className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   onError={() => setImageFailed(true)}
                 />
               )}

@@ -5,8 +5,29 @@ import PhoneMockup from './PhoneMockup'
 export default function Hero() {
   return (
     <section id="inicio" className="relative isolate overflow-hidden">
-      {/* Fondo: degradado diagonal ámbar + desvanecido a crema en la parte inferior */}
+      {/* Fondo original: degradado diagonal ámbar + desvanecido a crema en la parte inferior */}
       <div className="absolute inset-0 -z-10 bg-linear-to-br from-amber-600 via-amber-500 to-amber-200" aria-hidden />
+
+      {/* Sendero decorativo sutil en segundo plano */}
+      <svg
+        className="pointer-events-none absolute inset-0 -z-10 size-full text-amber-950/8"
+        viewBox="0 0 1440 900"
+        fill="none"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden
+      >
+        <path
+          d="M-80 680 C 260 520, 420 790, 740 540 C 1020 320, 1210 480, 1520 260"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeDasharray="10 14"
+          strokeLinecap="round"
+        />
+        <circle cx="310" cy="635" r="6" fill="currentColor" />
+        <circle cx="740" cy="540" r="8" fill="currentColor" />
+        <circle cx="1140" cy="405" r="6" fill="currentColor" />
+      </svg>
+
       <div
         className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-linear-to-b from-transparent to-amber-50"
         aria-hidden
@@ -27,6 +48,21 @@ export default function Hero() {
             <Button href="#que-es" variant="outline">
               Conocer más
             </Button>
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-amber-950/80">
+            <span className="inline-flex items-center gap-2">
+              <span className="size-2 rounded-full bg-amber-800" aria-hidden />
+              7 Pueblos Mágicos
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="size-2 rounded-full bg-amber-800" aria-hidden />
+              Mapa interactivo y retos
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="size-2 rounded-full bg-amber-800" aria-hidden />
+              Impulso al comercio local
+            </span>
           </div>
         </div>
 
