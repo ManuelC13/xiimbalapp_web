@@ -29,7 +29,7 @@ export default function Hero() {
       </svg>
 
       <div
-        className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-linear-to-b from-transparent to-amber-50"
+        className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-linear-to-b from-amber-50/0 via-amber-50/70 to-amber-50"
         aria-hidden
       />
 
@@ -48,21 +48,6 @@ export default function Hero() {
             <Button href="#que-es" variant="outline">
               Conocer más
             </Button>
-          </div>
-
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-amber-950/80">
-            <span className="inline-flex items-center gap-2">
-              <span className="size-2 rounded-full bg-amber-800" aria-hidden />
-              7 Pueblos Mágicos
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="size-2 rounded-full bg-amber-800" aria-hidden />
-              Mapa interactivo y retos
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="size-2 rounded-full bg-amber-800" aria-hidden />
-              Impulso al comercio local
-            </span>
           </div>
         </div>
 

@@ -24,19 +24,26 @@ export default function About() {
   return (
     <Section id="que-es" className="overflow-x-clip">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+
         <Reveal direction="left">
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">¿Qué es XíimbalApp?</h2>
+          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+            ¿Qué es XíimbalApp?
+          </h2>
           <p className="mt-6 text-lg leading-relaxed text-amber-800 sm:text-xl">
-            Cada pueblo tiene una historia que contar, un lugar por descubrir y experiencias que 
-            vale la pena vivir. <span className="font-extrabold">XíimbalApp</span> es tu compañera para explorar los Pueblos Mágicos de Yucatán, con 
-            un mapa interactivo que te acerca a sus atractivos turísticos y a los negocios que dan vida a sus comunidades.
+            Cada pueblo tiene una historia que contar, un lugar por descubrir y experiencias que
+            vale la pena vivir. <span className="font-extrabold">XíimbalApp</span>, cuyo nombre proviene
+            de la palabra maya <span className="font-semibold italic">Xíimbal</span>, que significa
+            caminar, pasear o recorrer, es tu compañera para explorar los Pueblos Mágicos de Yucatán.
+            A través de un mapa interactivo, te acerca a sus atractivos turísticos y a los negocios
+            que dan vida a sus comunidades.
           </p>
           <p className="mt-5 text-lg leading-relaxed text-amber-800 sm:text-xl">
-            Olvídate de buscar información en mil lugares. Encuentra nuevas opciones para tu recorrido, atrévete a 
-            completar retos y descubre una manera diferente de conocer Yucatán, mientras contribuyes a dar 
-            visibilidad a quienes hacen únicos sus destinos.
+            Olvídate de buscar información en mil lugares. Encuentra nuevas opciones para tu recorrido,
+            atrévete a completar retos y descubre una manera diferente de conocer Yucatán, mientras
+            contribuyes a dar visibilidad a quienes hacen únicos sus destinos.
           </p>
         </Reveal>
+
 
         <div className="relative">
           {/* Línea punteada que conecta las tarjetas como estaciones de un camino */}

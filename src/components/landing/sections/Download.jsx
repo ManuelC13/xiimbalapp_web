@@ -27,11 +27,11 @@ export default function Download() {
     : null
 
   return (
-    <div className="relative">
-      {/* Onda orgánica superior */}
-      <div className="pointer-events-none -mb-1 overflow-hidden text-amber-100/50" aria-hidden>
+    <div className="relative bg-amber-100/50">
+      {/* Onda orgánica superior (recorte sólido del color de fondo base para evitar líneas entre capas translúcidas) */}
+      <div className="pointer-events-none relative -top-0.5 overflow-hidden text-amber-50" aria-hidden>
         <svg viewBox="0 0 1440 72" fill="currentColor" className="block h-10 w-full sm:h-16" preserveAspectRatio="none">
-          <path d="M0,24 C360,78 720,-12 1080,42 C1260,68 1380,44 1440,28 L1440,72 L0,72 Z" />
+          <path d="M0,24 C360,78 720,-12 1080,42 C1260,68 1380,44 1440,28 L1440,0 L0,0 Z" />
         </svg>
       </div>
 
@@ -44,7 +44,6 @@ export default function Download() {
             : 'Disponible muy pronto para su descarga. ¡Esperanos y encuentra tu próxima aventura con XíimbalApp!'
         }
         align="center"
-        className="bg-amber-100/50"
       >
         <Reveal className="mx-auto max-w-3xl rounded-[2.5rem] border border-amber-100 bg-white p-8 text-center shadow-xl shadow-amber-950/10 sm:p-12">
           <div className="relative mx-auto size-20">
