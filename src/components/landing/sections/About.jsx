@@ -23,8 +23,7 @@ const HIGHLIGHTS = [
 export default function About() {
   return (
     <Section id="que-es" className="overflow-x-clip">
-      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-
+      <div className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-20">
         <Reveal direction="left">
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
             ¿Qué es XíimbalApp?
@@ -48,11 +47,11 @@ export default function About() {
         <div className="relative">
           {/* Línea punteada que conecta las tarjetas como estaciones de un camino */}
           <div
-            className="pointer-events-none absolute bottom-10 left-10 top-10 hidden border-l-2 border-dashed border-amber-300/80 sm:block"
+            className="pointer-events-none absolute bottom-10 left-11 top-10 border-l-2 border-dashed border-amber-300/80 sm:left-13"
             aria-hidden
           />
 
-          <ul className="space-y-4">
+          <ul className="space-y-3.5 sm:space-y-4">
             {HIGHLIGHTS.map(({ icon: Icon, title, text }, index) => (
               <Reveal
                 as="li"
@@ -62,14 +61,14 @@ export default function About() {
                 className={index === 1 ? 'lg:translate-x-4' : ''}
               >
                 <div
-                  className="group relative flex cursor-default items-center gap-5 rounded-3xl border border-amber-100 bg-white p-6 shadow-lg shadow-amber-950/5 transition duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.02] hover:border-amber-400 hover:shadow-xl hover:shadow-amber-500/25 active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-0 motion-reduce:hover:scale-100"
+                  className="group relative flex cursor-default items-start gap-4 rounded-3xl border border-amber-100 bg-white p-5 shadow-lg shadow-amber-950/5 transition duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.02] hover:border-amber-400 hover:shadow-xl hover:shadow-amber-500/25 active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-0 motion-reduce:hover:scale-100 sm:items-center sm:gap-5 sm:p-6"
                 >
-                  <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-amber-950 transition duration-300 ease-out group-hover:rotate-6 group-hover:scale-110 group-hover:bg-amber-950 group-hover:text-amber-400 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100">
-                    <Icon className="size-7" aria-hidden />
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-amber-950 transition duration-300 ease-out group-hover:rotate-6 group-hover:scale-110 group-hover:bg-amber-950 group-hover:text-amber-400 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100 sm:size-14">
+                    <Icon className="size-6 sm:size-7" aria-hidden />
                   </span>
                   <div>
-                    <h3 className="text-xl font-extrabold transition-colors duration-300 group-hover:text-amber-700">{title}</h3>
-                    <p className="mt-1 leading-relaxed text-amber-800 lg:pr-2">{text}</p>
+                    <h3 className="text-lg font-extrabold transition-colors duration-300 group-hover:text-amber-700 sm:text-xl">{title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-amber-800 sm:text-base lg:pr-2">{text}</p>
                   </div>
                 </div>
               </Reveal>

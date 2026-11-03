@@ -45,21 +45,21 @@ export default function Download() {
         }
         align="center"
       >
-        <Reveal className="mx-auto max-w-3xl rounded-[2.5rem] border border-amber-100 bg-white p-8 text-center shadow-xl shadow-amber-950/10 sm:p-12">
-          <div className="relative mx-auto size-20">
+        <Reveal className="mx-auto max-w-3xl rounded-3xl border border-amber-100 bg-white p-6 text-center shadow-xl shadow-amber-950/10 sm:rounded-[2.5rem] sm:p-12">
+          <div className="relative mx-auto size-18 sm:size-20">
             <span
               className="absolute -inset-3 animate-circle-pulse rounded-4xl bg-amber-300/40 motion-reduce:animate-none"
               aria-hidden
             />
-            <span className="relative flex size-20 items-center justify-center rounded-3xl bg-amber-500 text-amber-950">
-              <BrandIcon name="android" className="size-10" />
+            <span className="relative flex size-18 items-center justify-center rounded-3xl bg-amber-500 text-amber-950 sm:size-20">
+              <BrandIcon name="android" className="size-9 sm:size-10" />
             </span>
           </div>
 
-          <h3 className="mt-8 text-2xl font-extrabold sm:text-3xl">XíimbalApp para Android</h3>
+          <h3 className="mt-6 text-xl font-extrabold sm:mt-8 sm:text-3xl">XíimbalApp para Android</h3>
 
           <span
-            className={`mt-4 inline-block rounded-full px-4 py-1 text-sm font-bold ${
+            className={`mt-3 inline-block rounded-full px-4 py-1 text-sm font-bold sm:mt-4 ${
               available ? 'bg-success-light text-success' : 'bg-amber-100 text-amber-800'
             }`}
           >
@@ -77,9 +77,9 @@ export default function Download() {
             </dl>
           )}
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <div className="mt-6 flex flex-wrap justify-center gap-4 sm:mt-8">
             {available ? (
-              <Button href={url} size="lg">
+              <Button href={url} size="lg" className="w-full sm:w-auto">
                 <DownloadIcon className="size-5" aria-hidden />
                 Descargar APK
               </Button>
@@ -88,7 +88,7 @@ export default function Download() {
                 <Button
                   size="lg"
                   disabled
-                  className="disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-amber-950"
+                  className="w-full disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-amber-950 sm:w-auto"
                 >
                   <DownloadIcon className="size-5" aria-hidden />
                   Descargar APK
@@ -103,19 +103,23 @@ export default function Download() {
             )}
           </div>
 
-          <div className="mt-10 border-t border-amber-100 pt-8 text-left">
-            <h4 className="text-center text-lg text-amber-800 font-extrabold">Cómo instalarla</h4>
+          <div className="mt-8 border-t border-amber-100 pt-6 text-left sm:mt-10 sm:pt-8">
+            <h4 className="text-center text-base font-extrabold text-amber-800 sm:text-lg">Cómo instalarla</h4>
             <ol className="relative mt-5 grid gap-4 sm:grid-cols-3">
+              <div
+                className="pointer-events-none absolute bottom-4 left-4.25 top-4 border-l-2 border-dashed border-amber-300/80 sm:hidden"
+                aria-hidden
+              />
               <div
                 className="pointer-events-none absolute left-[18%] right-[18%] top-4.5 hidden border-t-2 border-dashed border-amber-300/80 sm:block"
                 aria-hidden
               />
               {INSTALL_STEPS.map((step, index) => (
-                <li key={step} className="relative flex items-start gap-3 sm:flex-col sm:items-center sm:text-center">
+                <li key={step} className="relative flex items-start gap-3.5 sm:flex-col sm:items-center sm:gap-3 sm:text-center">
                   <span className="relative z-10 flex size-9 shrink-0 items-center justify-center rounded-full bg-amber-500 font-extrabold text-amber-950 ring-4 ring-white">
                     {index + 1}
                   </span>
-                  <span className="leading-snug text-amber-800">{step}</span>
+                  <span className="pt-1 text-sm leading-snug text-amber-800 sm:pt-0 sm:text-base">{step}</span>
                 </li>
               ))}
             </ol>

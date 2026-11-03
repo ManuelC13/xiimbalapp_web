@@ -19,7 +19,7 @@ export default function Navbar() {
         solid ? 'bg-amber-50/95 shadow-md shadow-amber-950/5 backdrop-blur' : 'bg-transparent'
       }`}
     >
-      <nav className="mx-auto flex h-25 max-w-8xl items-center justify-between px-6 lg:px-15" aria-label="Principal">
+      <nav className="mx-auto flex h-20 max-w-8xl items-center justify-between px-5 sm:h-25 sm:px-6 lg:px-15" aria-label="Principal">
         <a href="#inicio" aria-label={`${SITE.name}, ir al inicio`} onClick={close}>
           <Logo variant={solid ? 'scrolled' : 'hero'} />
         </a>
@@ -42,7 +42,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setOpen((value) => !value)}
-          className="rounded-full p-2 text-amber-950 hover:bg-amber-950/10 md:hidden"
+          className="rounded-full p-2.5 text-amber-950 transition-colors active:bg-amber-950/15 hover:bg-amber-950/10 md:hidden"
           aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={open}
           aria-controls="menu-movil"
@@ -52,21 +52,21 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div id="menu-movil" className="border-t border-amber-950/10 px-6 pb-6 md:hidden">
-          <ul className="space-y-1 py-4">
+        <div id="menu-movil" className="border-t border-amber-950/10 px-5 pb-6 shadow-xl shadow-amber-950/10 sm:px-6 md:hidden">
+          <ul className="space-y-1 py-3">
             {SITE.nav.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={close}
-                  className="block rounded-2xl px-4 py-3 text-lg font-semibold text-amber-950 hover:bg-amber-100"
+                  className="block rounded-2xl px-4 py-3 text-base font-semibold text-amber-950 transition-colors active:bg-amber-200/70 hover:bg-amber-100 sm:text-lg"
                 >
                   {link.label}
                 </a>
               </li>
             ))}
           </ul>
-          <Button href={SITE.downloadUrl} onClick={close} className="w-full">
+          <Button href={SITE.downloadUrl} onClick={close} className="mt-1 w-full">
             Descargar app
           </Button>
         </div>

@@ -12,9 +12,9 @@ export default function Logo({ variant = 'hero', className = '' }) {
   const shown = usable.includes(variant) ? variant : usable[0]
 
   return (
-    <span className={`inline-flex items-center gap-3 ${className}`}>
+    <span className={`inline-flex items-center gap-2.5 sm:gap-3 ${className}`}>
       {shown ? (
-        <span className="relative size-11 shrink-0">
+        <span className="relative size-9 shrink-0 sm:size-11">
           {usable.map((key) => (
             <img
               key={key}
@@ -28,11 +28,11 @@ export default function Logo({ variant = 'hero', className = '' }) {
           ))}
         </span>
       ) : (
-        <span className="flex size-11 items-center justify-center rounded-xl bg-amber-500 text-white">
-          <MapPin className="size-6" aria-hidden />
+        <span className="flex size-9 items-center justify-center rounded-xl bg-amber-500 text-white sm:size-11">
+          <MapPin className="size-5 sm:size-6" aria-hidden />
         </span>
       )}
-      <span className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+      <span className="text-xl font-extrabold tracking-tight sm:text-3xl">
         <span className={light ? 'text-amber-50' : 'text-amber-950'}>Xíimbal</span>
         <span className={light ? 'text-amber-50' : 'text-amber-800'}>App</span>
       </span>

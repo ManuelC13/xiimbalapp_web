@@ -38,12 +38,12 @@ export default function PhoneMockup({ className = '' }) {
     <div className={`relative flex items-center justify-center ${PHONE_WIDTH} ${className}`}>
       {/* Círculo decorativo detrás del teléfono con mayor opacidad para ocultar el sendero */}
       <div
-        className="absolute size-90 animate-circle-pulse rounded-full bg-amber-100/90 will-change-transform motion-reduce:animate-none sm:size-115 lg:size-[calc(var(--phone-w)*1.75)]"
+        className="absolute size-78 animate-circle-pulse rounded-full bg-amber-100/90 will-change-transform motion-reduce:animate-none sm:size-115 lg:size-[calc(var(--phone-w)*1.75)]"
         aria-hidden
       />
 
-      <div className="relative z-10 w-62.5 animate-phone-float rounded-[2.75rem] border-12 border-amber-950 bg-amber-950 shadow-2xl shadow-amber-950/30 will-change-transform motion-reduce:animate-none sm:w-72.5 lg:w-(--phone-w)">
-        <div className="aspect-9/19 overflow-hidden rounded-4xl bg-amber-50">
+      <div className="relative z-10 w-56 animate-phone-float rounded-[2.4rem] border-10 border-amber-950 bg-amber-950 shadow-2xl shadow-amber-950/30 will-change-transform motion-reduce:animate-none sm:w-72.5 sm:rounded-[2.75rem] sm:border-12 lg:w-(--phone-w)">
+        <div className="aspect-9/19 overflow-hidden rounded-[1.85rem] bg-amber-50 sm:rounded-4xl">
           {imageFailed ? (
             <PlaceholderScreen />
           ) : (

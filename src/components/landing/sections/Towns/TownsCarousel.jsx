@@ -16,11 +16,11 @@ export default function TownsCarousel({ towns }) {
 
   return (
     <div ref={ref}>
-      <div className="relative left-1/2 w-screen -translate-x-1/2">
+      <div className="-mx-5 sm:-mx-6 lg:-mx-10 xl:mx-[calc((100%-100vw)/2)]">
         <ul
           ref={listRef}
           aria-label="Pueblos Mágicos"
-          className="flex snap-x snap-mandatory scroll-pl-6 gap-6 overflow-x-auto px-6 pb-12 pt-6 scrollbar-none lg:scroll-pl-10 lg:px-10 [&::-webkit-scrollbar]:hidden *:first:ml-auto *:last:mr-auto"
+          className="flex snap-x snap-mandatory scroll-pl-5 gap-4 overflow-x-auto px-5 pb-8 pt-4 scrollbar-none sm:scroll-pl-6 sm:gap-6 sm:px-6 sm:pb-12 sm:pt-6 lg:scroll-pl-10 lg:px-10 [&::-webkit-scrollbar]:hidden *:first:ml-auto *:last:mr-auto"
         >
           {towns.map((town, index) => (
             <TownCard

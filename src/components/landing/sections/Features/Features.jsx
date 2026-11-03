@@ -20,7 +20,7 @@ export default function Features() {
         reveal
         className="overflow-clip"
       >
-        <div className="space-y-20 lg:space-y-32">
+        <div className="space-y-14 sm:space-y-20 lg:space-y-32">
           {FEATURES.map((feature, index) => (
             <FeatureRow key={feature.id} feature={feature} reverse={index % 2 === 1} />
           ))}

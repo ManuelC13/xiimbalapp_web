@@ -33,25 +33,25 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-10 px-6 pb-20 pt-32 lg:grid-cols-[1.15fr_1fr] lg:gap-6 lg:px-10 lg:short:pb-10 lg:short:pt-28">
+      <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-8 px-5 pb-14 pt-24 sm:gap-10 sm:px-6 sm:pb-20 sm:pt-32 lg:grid-cols-[1.15fr_1fr] lg:gap-6 lg:px-10 lg:short:pb-10 lg:short:pt-28">
         <div className="max-w-2xl lg:pl-10">
-          <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:short:text-5xl">
+          <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl sm:leading-[1.05] lg:short:text-5xl">
             Explora los <span className="text-amber-800">Pueblos Mágicos</span> de Yucatán
           </h1>
-          <p className="mt-8 max-w-lg text-xl leading-relaxed text-amber-950/90">
+          <p className="mt-5 max-w-lg text-lg leading-relaxed text-amber-950/90 sm:mt-8 sm:text-xl">
             Descubre lugares, completa retos, obtén recompensas y recorre el estado con un mapa en tu bolsillo.
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Button href={SITE.downloadUrl}>
+          <div className="mt-8 flex flex-row flex-wrap items-center gap-3 sm:mt-10 sm:gap-4">
+            <Button href={SITE.downloadUrl} className="px-5 text-base sm:px-7 sm:text-lg">
               Descargar la app
             </Button>
-            <Button href="#que-es" variant="outline">
+            <Button href="#que-es" variant="outline" className="px-5 text-base sm:px-7 sm:text-lg">
               Conocer más
             </Button>
           </div>
         </div>
 
-        <PhoneMockup className="py-6" />
+        <PhoneMockup className="py-4 sm:py-6" />
       </div>
     </section>
   )
