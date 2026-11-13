@@ -23,7 +23,7 @@ function Field({ id, label, icon: Icon, ...props }) {
 
 export default function LoginPage() {
   const navigate = useNavigate()
-  const { user, ready, login } = useAuthStore()
+  const { user, ready, login, sessionExpired } = useAuthStore()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -65,6 +65,12 @@ export default function LoginPage() {
             value={email} onChange={(e) => setEmail(e.target.value)} />
           <Field id="password" label="Contraseña" placeholder="********" icon={Lock} required type="password" autoComplete="current-password"
             value={password} onChange={(e) => setPassword(e.target.value)} />
+
+          {!error && sessionExpired && (
+            <p role="status" className="rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              Tu sesión expiró. Vuelve a iniciar sesión.
+            </p>
+          )}
 
           {error && (
             <p role="alert" className="rounded-2xl border border-border-error bg-background-error px-4 py-3 text-sm text-error">

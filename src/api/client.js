@@ -4,11 +4,32 @@ const API_URL = import.meta.env.DEV
 
 const NO_REFRESH = ['/api/auth/login', '/api/auth/refresh', '/api/auth/logout']
 
+// Se ejecuta cuando la sesión ya no puede renovarse (refresh token inválido/expirado).
+let sessionExpiredHandler = null
+export function setSessionExpiredHandler(handler) {
+  sessionExpiredHandler = handler
+}
+
+/**
+ * Renueva el access_token usando la cookie refresh_token.
+ * Las peticiones concurrentes comparten la misma promesa para no disparar varios refresh.
+ * Resuelve `true` si la sesión se renovó.
+ */
 let refreshing = null
-function refreshSession() {
-  refreshing ??= fetch(`${API_URL}/api/auth/refresh`, { method: 'POST', credentials: 'include' })
-    .then((response) => response.ok)
-    .catch(() => false)
+export function refreshSession() {
+  refreshing ??= fetch(`${API_URL}/api/auth/refresh`, {
+    method: 'POST',
+    credentials: 'include',
+    cache: 'no-store',
+  })
+    .then((response) => {
+      if (!response.ok) console.warn(`[auth] No se pudo renovar la sesión (HTTP ${response.status})`)
+      return response.ok
+    })
+    .catch((err) => {
+      console.warn('[auth] Error de red al renovar la sesión', err)
+      return false
+    })
     .finally(() => { refreshing = null })
   return refreshing
 }
@@ -22,19 +43,28 @@ export async function apiRequest(endpoint, { body, headers = {}, ...options } = 
   const send = () =>
     fetch(`${API_URL}${endpoint}`, {
       credentials: 'include',
+      cache: 'no-store',
       ...options,
       headers: resolvedHeaders,
       body: isFormData ? body : body ? JSON.stringify(body) : undefined,
     })
 
   let response = await send()
-  if (response.status === 401 && !NO_REFRESH.includes(endpoint) && (await refreshSession())) {
-    response = await send()
+
+  if (response.status === 401 && !NO_REFRESH.includes(endpoint)) {
+    // Si hay otro refresh en curso (o recién terminado) se reutiliza.
+    if (await refreshSession()) {
+      response = await send()
+    }
+    // Si aun así sigue en 401, la sesión murió: avisar al store para cerrar sesión.
+    if (response.status === 401) sessionExpiredHandler?.()
   }
 
   const data = await response.json().catch(() => null)
   if (!response.ok) {
-    throw new Error(typeof data?.detail === 'string' ? data.detail : `Error ${response.status}`)
+    const error = new Error(typeof data?.detail === 'string' ? data.detail : `Error ${response.status}`)
+    error.status = response.status
+    throw error
   }
   return data
 }
