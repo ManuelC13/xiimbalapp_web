@@ -5,6 +5,9 @@ import {
   createPlace,
   updatePlace,
   updatePlaceCategories,
+  createPlaceSchedule,
+  updatePlaceSchedule,
+  deletePlaceSchedule,
   getPlaceImages,
   addPlaceImage,
   uploadPlaceImage,
@@ -12,6 +15,75 @@ import {
   getCategories,
 } from '@/api/places'
 import { getMagicalTown } from '@/api/towns'
+
+const DAYS_OF_WEEK = [
+  { day_of_week: 1, label: 'Lunes' },
+  { day_of_week: 2, label: 'Martes' },
+  { day_of_week: 3, label: 'Miércoles' },
+  { day_of_week: 4, label: 'Jueves' },
+  { day_of_week: 5, label: 'Viernes' },
+  { day_of_week: 6, label: 'Sábado' },
+  { day_of_week: 7, label: 'Domingo' },
+]
+
+function buildSchedulesState(existingSchedules = []) {
+  const byDay = new Map(existingSchedules.map((s) => [s.day_of_week, s]))
+  return DAYS_OF_WEEK.map(({ day_of_week, label }) => {
+    const existing = byDay.get(day_of_week)
+    if (!existing) {
+      return {
+        day_of_week,
+        label,
+        schedule_id: null,
+        status: 'unset',
+        opening_time: '09:00',
+        closing_time: '18:00',
+      }
+    }
+    return {
+      day_of_week,
+      label,
+      schedule_id: existing.schedule_id,
+      status: existing.is_closed ? 'closed' : 'open',
+      opening_time: existing.opening_time ? String(existing.opening_time).slice(0, 5) : '09:00',
+      closing_time: existing.closing_time ? String(existing.closing_time).slice(0, 5) : '18:00',
+    }
+  })
+}
+
+async function syncSchedules(targetPlaceId, schedules) {
+  const tasks = []
+  for (const day of schedules) {
+    if (day.status === 'unset') {
+      if (day.schedule_id) {
+        tasks.push(deletePlaceSchedule(day.schedule_id))
+      }
+      continue
+    }
+
+    const payload =
+      day.status === 'closed'
+        ? { is_closed: true, opening_time: null, closing_time: null }
+        : {
+            is_closed: false,
+            opening_time: day.opening_time,
+            closing_time: day.closing_time,
+          }
+
+    if (day.schedule_id) {
+      tasks.push(updatePlaceSchedule(day.schedule_id, payload))
+    } else {
+      tasks.push(
+        createPlaceSchedule({
+          place_id: Number(targetPlaceId),
+          day_of_week: day.day_of_week,
+          ...payload,
+        })
+      )
+    }
+  }
+  await Promise.all(tasks)
+}
 
 /**
  * Hook para la página de creación y edición completa de un lugar turístico.
@@ -38,6 +110,7 @@ export function usePlaceForm() {
   const [historicalInfo, setHistoricalInfo] = useState('')
   const [isActive, setIsActive] = useState(true)
   const [selectedCategories, setSelectedCategories] = useState([])
+  const [schedules, setSchedules] = useState(() => buildSchedulesState())
 
   // Fotos
   const [existingImages, setExistingImages] = useState([])
@@ -85,6 +158,7 @@ export function usePlaceForm() {
           setHistoricalInfo(placeData.historical_info || '')
           setIsActive(placeData.is_active ?? true)
           setSelectedCategories(Array.isArray(placeData.category_ids) ? placeData.category_ids : [])
+          setSchedules(buildSchedulesState(Array.isArray(placeData.schedules) ? placeData.schedules : []))
           setExistingImages(Array.isArray(imagesData) ? imagesData : placeData.images || [])
         }
       } catch (err) {
@@ -104,6 +178,29 @@ export function usePlaceForm() {
     setSelectedCategories((prev) =>
       prev.includes(catId) ? prev.filter((id) => id !== catId) : [...prev, catId]
     )
+  }, [])
+
+  const handleChangeScheduleDay = useCallback((dayOfWeek, patch) => {
+    setSchedules((prev) =>
+      prev.map((day) => (day.day_of_week === dayOfWeek ? { ...day, ...patch } : day))
+    )
+  }, [])
+
+  const handleApplyFirstOpenToAll = useCallback(() => {
+    setSchedules((prev) => {
+      const source = prev.find((d) => d.status === 'open')
+      if (!source) return prev
+      return prev.map((day) => ({
+        ...day,
+        status: 'open',
+        opening_time: source.opening_time,
+        closing_time: source.closing_time,
+      }))
+    })
+  }, [])
+
+  const handleResetAllSchedules = useCallback(() => {
+    setSchedules((prev) => prev.map((day) => ({ ...day, status: 'unset' })))
   }, [])
 
   const handleFileChange = useCallback((e) => {
@@ -200,6 +297,21 @@ export function usePlaceForm() {
       return
     }
 
+    for (const day of schedules) {
+      if (day.status === 'open') {
+        if (!day.opening_time || !day.closing_time) {
+          setError(`Ingresa la hora de apertura y cierre para ${day.label}.`)
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+          return
+        }
+        if (day.closing_time <= day.opening_time) {
+          setError(`En ${day.label}, la hora de cierre debe ser mayor que la hora de apertura.`)
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+          return
+        }
+      }
+    }
+
     setSaving(true)
     setError('')
 
@@ -222,6 +334,8 @@ export function usePlaceForm() {
         } catch {
           // Continuar
         }
+
+        await syncSchedules(placeId, schedules)
 
         // Si quedó alguna imagen seleccionada sin subir antes de guardar
         if (imageMode === 'file' && selectedFile) {
@@ -252,6 +366,8 @@ export function usePlaceForm() {
         }
 
         const created = await createPlace(createData)
+
+        await syncSchedules(created.place_id, schedules)
 
         if (imageMode === 'file' && selectedFile) {
           try {
@@ -284,6 +400,7 @@ export function usePlaceForm() {
     historicalInfo,
     isActive,
     selectedCategories,
+    schedules,
     isEditing,
     imageMode,
     selectedFile,
@@ -325,6 +442,10 @@ export function usePlaceForm() {
     setIsActive,
     selectedCategories,
     toggleCategory,
+    schedules,
+    handleChangeScheduleDay,
+    handleApplyFirstOpenToAll,
+    handleResetAllSchedules,
     existingImages,
     imageMode,
     setImageMode,

@@ -67,6 +67,19 @@ export const updatePlaceCategories = (placeId, categoryIds) =>
     body: categoryIds,
   })
 
+// Horarios del lugar
+export const getPlaceSchedules = (placeId) =>
+  apiRequest(`/place-schedules/by-place/${placeId}`)
+
+export const createPlaceSchedule = (data) =>
+  apiRequest('/place-schedules/', { method: 'POST', body: data })
+
+export const updatePlaceSchedule = (scheduleId, data) =>
+  apiRequest(`/place-schedules/${scheduleId}`, { method: 'PUT', body: data })
+
+export const deletePlaceSchedule = (scheduleId) =>
+  apiRequest(`/place-schedules/${scheduleId}`, { method: 'DELETE' })
+
 // Códigos QR de validación de visita
 export const getPlaceActiveQr = (placeId) =>
   apiRequest(`/api/admin/places/${placeId}/qr-codes/active`)

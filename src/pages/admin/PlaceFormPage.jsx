@@ -7,6 +7,7 @@ import {
   PlaceFormHeader,
   PlaceGeneralInfoSection,
   PlaceLocationSection,
+  PlaceSchedulesSection,
   PlaceGallerySection,
   PlaceSidebar,
   PlaceImageLightbox,
@@ -38,6 +39,10 @@ export default function PlaceFormPage() {
     setIsActive,
     selectedCategories,
     toggleCategory,
+    schedules,
+    handleChangeScheduleDay,
+    handleApplyFirstOpenToAll,
+    handleResetAllSchedules,
     existingImages,
     imageMode,
     setImageMode,
@@ -135,7 +140,15 @@ export default function PlaceFormPage() {
             mapsUrl={mapsUrl}
           />
 
-          {/* SECCIÓN 3: Galería Fotográfica */}
+          {/* SECCIÓN 3: Horarios de atención */}
+          <PlaceSchedulesSection
+            schedules={schedules}
+            onChangeDay={handleChangeScheduleDay}
+            onApplyFirstOpenToAll={handleApplyFirstOpenToAll}
+            onResetAll={handleResetAllSchedules}
+          />
+
+          {/* SECCIÓN 4: Galería Fotográfica */}
           <PlaceGallerySection
             isEditing={isEditing}
             existingImages={existingImages}

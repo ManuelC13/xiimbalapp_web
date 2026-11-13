@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
         '/categories': { target: apiTarget, changeOrigin: true, secure: true },
         '/place-types': { target: apiTarget, changeOrigin: true, secure: true },
         '/place-images': { target: apiTarget, changeOrigin: true, secure: true },
+        '/place-schedules': { target: apiTarget, changeOrigin: true, secure: true },
         '/uploads': { target: apiTarget, changeOrigin: true, secure: true },
         '/badges': { target: apiTarget, changeOrigin: true, secure: true },
         '/challenges': { target: apiTarget, changeOrigin: true, secure: true },
