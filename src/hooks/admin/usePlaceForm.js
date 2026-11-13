@@ -208,10 +208,10 @@ export function usePlaceForm() {
         const updateData = {
           name: name.trim(),
           description: description.trim(),
-          address: address.trim() || undefined,
+          address: address.trim() || null,
           latitude: lat,
           longitude: lng,
-          historical_info: historicalInfo.trim() || undefined,
+          historical_info: historicalInfo.trim() || null,
           is_active: isActive,
         }
 
