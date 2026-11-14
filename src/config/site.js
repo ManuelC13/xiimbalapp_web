@@ -15,10 +15,10 @@ export const SITE = {
 
   // Enlace para el botón "Descargar APK"
   apk: {
-    url: '', 
-    version: '',                     // OPCIONAL - ejemplo: 1.0.0
-    size: '',                        // OPCIONAL - ejemplo: 45 MB
-    minAndroid: '', // OPCIONAL - ejemplo: Android 8.0 o superior
+    url: 'https://github.com/RaulNahuat/xiimbalapp-downloads/releases/download/v1.0.0/XiimbalApp.apk',
+    version: '1.0.0',                     // OPCIONAL - ejemplo: 1.0.0
+    size: '205 MB',                        // OPCIONAL - ejemplo: 45 MB
+    minAndroid: 'Android 13.0 o superior', // OPCIONAL - ejemplo: Android 8.0 o superior
   },
 
   // Redes sociales
@@ -29,7 +29,7 @@ export const SITE = {
   ],
 
   // Contacto
-    contactEmail: 'xiimbalapp@gmail.com',
+  contactEmail: 'xiimbalapp@gmail.com',
 
   // Acceso al panel de administración
   adminUrl: '/admin',
