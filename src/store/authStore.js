@@ -76,6 +76,12 @@ export const useAuthStore = create((set, get) => {
         )
       }
 
+      if (!isAdmin(user)) {
+        await authApi.logout().catch(() => {})
+        setSession(null)
+        throw new Error('Acceso denegado. Solo los administradores pueden iniciar sesión.')
+      }
+
       setSession(user)
       return user
     },

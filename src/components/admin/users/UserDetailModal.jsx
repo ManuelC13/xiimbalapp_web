@@ -3,6 +3,7 @@ import {
   User,
   Mail,
   Shield,
+  Compass,
   Calendar,
   MapPin,
   Target,

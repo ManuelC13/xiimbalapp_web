@@ -29,7 +29,7 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  if (ready && user) return <Navigate to={isAdmin(user) ? '/admin' : '/'} replace />
+  if (ready && user && isAdmin(user)) return <Navigate to="/admin" replace />
 
   const handleSubmit = async (event) => {
     event.preventDefault()
