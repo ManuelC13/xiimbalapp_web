@@ -80,9 +80,9 @@ export default function BadgesList() {
 
       {/* Grid de insignias */}
       {loading ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-60 animate-pulse rounded-3xl bg-amber-100/50" />
+        <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-72 animate-pulse rounded-3xl bg-amber-100/50" />
           ))}
         </div>
       ) : filteredBadges.length === 0 ? (
@@ -107,16 +107,16 @@ export default function BadgesList() {
           )}
         </div>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {filteredBadges.map((badge) => {
             const count = challengesCount[badge.badge_id] || 0
             return (
               <article
                 key={badge.badge_id}
-                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-md shadow-amber-950/5 transition hover:-translate-y-1 hover:shadow-xl"
+                className="group relative flex min-h-72 flex-col overflow-hidden rounded-3xl bg-white shadow-md shadow-amber-950/5 transition hover:-translate-y-1 hover:shadow-xl"
               >
                 {/* Ícono */}
-                <div className="relative flex h-44 w-full items-center justify-center overflow-hidden bg-amber-100 p-6">
+                <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-amber-100 p-6">
                   {badge.icon_url ? (
                     <img
                       src={resolveImageUrl(badge.icon_url)}
@@ -127,15 +127,15 @@ export default function BadgesList() {
                       }}
                     />
                   ) : (
-                    <Award className="size-16 text-amber-600 opacity-80" />
+                    <Award className="size-14 text-amber-600 opacity-80" />
                   )}
 
-                  <span className="absolute bottom-3 left-3 rounded-full bg-amber-950/70 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+                  <span className="absolute bottom-2.5 left-2.5 rounded-full bg-amber-950/70 px-2.5 py-0.5 text-[11px] font-semibold text-white backdrop-blur-md">
                     {count} {count === 1 ? 'reto' : 'retos'}
                   </span>
 
                   {/* Acciones rápidas */}
-                  <div className="absolute right-3 top-3 flex items-center gap-1.5 opacity-90 transition group-hover:opacity-100">
+                  <div className="absolute right-2.5 top-2.5 flex items-center gap-1.5 opacity-90 transition group-hover:opacity-100">
                     <button
                       type="button"
                       title="Editar insignia"
@@ -156,9 +156,11 @@ export default function BadgesList() {
                 </div>
 
                 {/* Info */}
-                <div className="flex-1 p-6">
-                  <h3 className="text-xl font-bold text-amber-950">{badge.badge_name}</h3>
-                  <p className="mt-1 line-clamp-3 text-sm text-gris-700">{badge.description}</p>
+                <div className="flex-1 p-5">
+                  <h3 className="text-base font-bold text-amber-950">{badge.badge_name}</h3>
+                  <p className="mt-1.5 line-clamp-3 text-xs leading-relaxed text-gris-700">
+                    {badge.description}
+                  </p>
                 </div>
               </article>
             )
