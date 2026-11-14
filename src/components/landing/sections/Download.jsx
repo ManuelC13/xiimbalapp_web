@@ -1,6 +1,5 @@
 import { Download as DownloadIcon, Mail } from 'lucide-react'
 import Button from '@/components/ui/Button'
-import BrandIcon from '@/components/ui/BrandIcon'
 import Reveal from '@/components/ui/Reveal'
 import { SITE } from '@/config/site'
 import Section from '../Section'
@@ -46,22 +45,25 @@ export default function Download() {
         align="center"
       >
         <Reveal className="mx-auto max-w-3xl rounded-3xl border border-amber-100 bg-white p-6 text-center shadow-xl shadow-amber-950/10 sm:rounded-[2.5rem] sm:p-12">
-          <div className="relative mx-auto size-18 sm:size-20">
+          <div className="relative mx-auto flex size-24 items-center justify-center sm:size-26">
             <span
-              className="absolute -inset-3 animate-circle-pulse rounded-4xl bg-amber-300/40 motion-reduce:animate-none"
+              className="absolute inset-0 animate-circle-pulse rounded-4xl bg-amber-400/45 motion-reduce:animate-none"
               aria-hidden
             />
-            <span className="relative flex size-18 items-center justify-center rounded-3xl bg-amber-500 text-amber-950 sm:size-20">
-              <BrandIcon name="android" className="size-9 sm:size-10" />
+            <span className="relative flex size-18 items-center justify-center rounded-3xl bg-amber-950 p-3 shadow-lg shadow-amber-950/25 ring-1 ring-amber-800/50 sm:size-20">
+              <img
+                src="/favicon.png"
+                alt="Ícono de XíimbalApp"
+                className="size-full object-contain"
+              />
             </span>
           </div>
 
-          <h3 className="mt-6 text-xl font-extrabold sm:mt-8 sm:text-3xl">XíimbalApp para Android</h3>
+          <h3 className="mt-5 text-xl font-extrabold sm:mt-6 sm:text-3xl">XíimbalApp para Android</h3>
 
           <span
-            className={`mt-3 inline-block rounded-full px-4 py-1 text-sm font-bold sm:mt-4 ${
-              available ? 'bg-success-light text-success' : 'bg-amber-100 text-amber-800'
-            }`}
+            className={`mt-3 inline-block rounded-full px-4 py-1 text-sm font-bold sm:mt-4 ${available ? 'bg-success-light text-success' : 'bg-amber-100 text-amber-800'
+              }`}
           >
             {available ? 'Disponible' : 'Próximamente'}
           </span>
